@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="login-container">
     <div class="login-form">
       <div class="title">Welcome Back</div>
@@ -69,12 +69,12 @@
               type="submit"
               value="{{ isLoading ? 'Logging In...' : 'Login' }}"
             />
-            <!-- Loading Spinner -->
+
             <div *ngIf="isLoading" class="spinner-overlay">
               <div class="spinner"></div>
             </div>
           </div>
-
+          
           <div class="text signup-text">
             Don't have an account? <a routerLink="/register">Sign Up</a>
           </div>
@@ -82,4 +82,74 @@
       </form>
     </div>
   </div>
+</div> 
+-->
+
+<!-- Tamer Form UI -->
+<div id="container" class="d-flex flex-column justify-content-center">
+  <form id="login-form" [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+    <div class="mb-4">
+      <input required type="email" class="form-control" placeholder="Email" />
+
+      <div class="focus-indicator">
+        <div
+          class="error-message"
+          *ngIf="
+            loginForm.get('email')?.invalid &&
+            (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
+          "
+        >
+          <span *ngIf="loginForm.get('email')?.errors?.['required']"
+            >Email is required</span
+          >
+          <span *ngIf="loginForm.get('email')?.errors?.['email']"
+            >Please enter a valid email</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <input placeholder="Password" type="password" class="form-control" />
+
+      <div class="focus-indicator">
+        <div
+          class="error-message"
+          *ngIf="
+            loginForm.get('password')?.invalid &&
+            (loginForm.get('password')?.dirty ||
+              loginForm.get('password')?.touched)
+          "
+        >
+          <span *ngIf="loginForm.get('password')?.errors?.['required']"
+            >Password is required</span
+          >
+          <span *ngIf="loginForm.get('password')?.errors?.['minlength']"
+            >Password must be at least 6 characters</span
+          >
+        </div>
+      </div>
+    </div>
+    <p class="alert alert-danger">Invalid data placeholder...</p>
+    <div class="d-flex flex-column align-items-center gap-5">
+      <div>
+        <button
+          type="submit"
+          class="px-4 py-2 btn btn-dark rounded-pill fw-light"
+        >
+          Login
+        </button>
+      </div>
+      <p class="fs-6">
+        Don't have an account ?
+        <button
+          routerLink="/register"
+          id="sign-up-btn"
+          class="btn rounded-pill px-3"
+        >
+          Sign Up
+        </button>
+      </p>
+    </div>
+  </form>
 </div>

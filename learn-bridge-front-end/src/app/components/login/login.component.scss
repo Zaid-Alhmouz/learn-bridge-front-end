@@ -182,3 +182,26 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+
+// Styles here made by Tamer
+#container {
+  height: 100vh;
+  width: 40%;
+  margin: auto;
+}
+
+#login-form {
+  padding: 45px 25px 0px 25px;
+  background-color: #d9d9d9;
+  border-radius: 30px;
+}
+
+#sign-up-btn {
+  background-color: #03ccba;
+}
+
+#sign-up-btn:hover {
+  background-color: #02a698;
+  color: white;
+}
