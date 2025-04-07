@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="signup-container">
+    <div class="signup-form">
+      <div class="title">Create an Account</div>
+      <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
+        <div class="input-boxes">
+          <div class="input-box">
+            <i class="fas fa-user"></i>
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Enter your name"
+              required
+            />
+            <div class="focus-indicator"></div>
+            <div class="error-message" *ngIf="signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched)">
+              <span *ngIf="signupForm.get('name')?.errors?.['required']">Name is required</span>
+              <span *ngIf="signupForm.get('name')?.errors?.['minlength']">Name must be at least 2 characters</span>
+            </div>
+          </div>
+          
+          <div class="input-box">
+            <i class="fas fa-envelope"></i>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Enter your email"
+              required
+            />
+            <div class="focus-indicator"></div>
+            <div class="error-message" *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
+              <span *ngIf="signupForm.get('email')?.errors?.['required']">Email is required</span>
+              <span *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email</span>
+            </div>
+          </div>
+          
+          <div class="input-box">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="Enter your password"
+              required
+            />
+            <div class="focus-indicator"></div>
+            <div class="error-message" *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)">
+              <span *ngIf="signupForm.get('password')?.errors?.['required']">Password is required</span>
+              <span *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
+              <span *ngIf="signupForm.get('password')?.errors?.['pattern']">Password must contain at least one letter and one number</span>
+            </div>
+          </div>
+          
+          <p *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</p>
+
+          <div class="button input-box">
+            <input 
+              type="submit" 
+              value="{{ isLoading ? 'Signing Up...' : 'Sign Up' }}"
+            />
+            <!-- Loading Spinner -->
+            <div *ngIf="isLoading" class="spinner-overlay">
+              <div class="spinner"></div>
+            </div>
+          </div>
+          
+          <div class="text login-text">
+            Already have an account? <a routerLink="/login">Login</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

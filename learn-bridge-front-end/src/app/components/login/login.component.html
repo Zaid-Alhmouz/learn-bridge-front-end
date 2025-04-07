@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="login-container">
+    <div class="login-form">
+      <div class="title">Welcome Back</div>
+      <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+        <div class="input-boxes">
+          <div class="input-box">
+            <i class="fas fa-envelope"></i>
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Enter your email"
+              required
+            />
+            <div class="focus-indicator"></div>
+            <div
+              class="error-message"
+              *ngIf="
+                loginForm.get('email')?.invalid &&
+                (loginForm.get('email')?.dirty ||
+                  loginForm.get('email')?.touched)
+              "
+            >
+              <span *ngIf="loginForm.get('email')?.errors?.['required']"
+                >Email is required</span
+              >
+              <span *ngIf="loginForm.get('email')?.errors?.['email']"
+                >Please enter a valid email</span
+              >
+            </div>
+          </div>
+          <div class="input-box">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              formControlName="password"
+              placeholder="Enter your password"
+              required
+            />
+            <div class="focus-indicator"></div>
+            <div
+              class="error-message"
+              *ngIf="
+                loginForm.get('password')?.invalid &&
+                (loginForm.get('password')?.dirty ||
+                  loginForm.get('password')?.touched)
+              "
+            >
+              <span *ngIf="loginForm.get('password')?.errors?.['required']"
+                >Password is required</span
+              >
+              <span *ngIf="loginForm.get('password')?.errors?.['minlength']"
+                >Password must be at least 6 characters</span
+              >
+            </div>
+          </div>
+          <div class="forgot-password">
+            <a href="javascript:void(0)" (click)="onForgotPassword()"
+              >Forgot password?</a
+            >
+          </div>
+          <p *ngIf="errorMessage" class="alert alert-danger">
+            {{ errorMessage }}
+          </p>
+
+
+          <div class="button input-box">
+            <input
+              type="submit"
+              value="{{ isLoading ? 'Logging In...' : 'Login' }}"
+            />
+            <!-- Loading Spinner -->
+            <div *ngIf="isLoading" class="spinner-overlay">
+              <div class="spinner"></div>
+            </div>
+          </div>
+
+          <div class="text signup-text">
+            Don't have an account? <a routerLink="/register">Sign Up</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
