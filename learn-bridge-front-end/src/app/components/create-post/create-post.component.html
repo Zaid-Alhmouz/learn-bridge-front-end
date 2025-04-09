@@ -1,1 +1,58 @@
-<p>create-post works!</p>
+<div
+  class="my-5 d-flex flex-column justify-content-center align-items-center"
+  id="full-height"
+>
+  <form
+    class="container-background m-auto rounded-5 p-5 d-flex flex-column gap-4"
+  >
+    <h1>What's on your mind?</h1>
+    <div class="d-flex gap-5">
+      <input type="text" class="form-control" placeholder="Subject" />
+      <select class="form-select">
+        <option disabled selected>Category</option>
+        <option>Option 1</option>
+        <option>Option 2</option>
+        <option>Option 3</option>
+        <option>Option N</option>
+      </select>
+    </div>
+    <textarea class="p-2" placeholder="Description"></textarea>
+    <div class="d-flex justify-content-between">
+      <svg
+        width="35"
+        height="35"
+        viewBox="0 0 38 31"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g clip-path="url(#clip0_201_4081)">
+          <path
+            d="M36.7338 21.8001L31.5026 16.5747C30.8074 15.8795 29.8632 15.4913 28.8783 15.4913H24.2844C23.259 15.4913 22.4306 16.3198 22.4306 17.3451V21.9333C22.4306 22.9181 22.8187 23.8566 23.5139 24.5518L28.7451 29.7772C29.4692 30.5014 30.6452 30.5014 31.3694 29.7772L36.728 24.4186C37.458 23.6944 37.458 22.5242 36.7338 21.8001ZM26.144 20.5835C25.3735 20.5835 24.7536 19.9636 24.7536 19.1932C24.7536 18.4227 25.3735 17.8028 26.144 17.8028C26.9144 17.8028 27.5343 18.4227 27.5343 19.1932C27.5343 19.9578 26.9144 20.5835 26.144 20.5835ZM13.1789 15.4855C17.2747 15.4855 20.5941 12.1661 20.5941 8.07032C20.5941 3.98036 17.2747 0.660889 13.1789 0.660889C9.08316 0.660889 5.76369 3.98036 5.76369 8.07611C5.76369 12.1661 9.08316 15.4855 13.1789 15.4855ZM20.5825 21.9275V17.6927C19.8758 17.4842 19.1401 17.3336 18.3696 17.3336H17.4021C16.116 17.9245 14.6851 18.2605 13.1789 18.2605C11.6727 18.2605 10.2476 17.9245 8.95571 17.3336H7.98825C3.68974 17.3393 0.202271 20.8268 0.202271 25.1253V27.5353C0.202271 29.0705 1.4478 30.316 2.98298 30.316H23.3748C24.2728 30.316 25.0606 29.8815 25.5704 29.2211L22.2104 25.8611C21.1619 24.8125 20.5825 23.4164 20.5825 21.9275Z"
+            fill="black"
+          />
+        </g>
+        <defs>
+          <clipPath id="clip0_201_4081">
+            <rect
+              width="37.0761"
+              height="29.6609"
+              fill="white"
+              transform="translate(0.202271 0.660889)"
+            />
+          </clipPath>
+        </defs>
+      </svg>
+
+      <input
+        id="price-input"
+        type="text"
+        class="form-control"
+        placeholder="Price"
+      />
+    </div>
+    <p class="alert alert-danger">Invalid data placeholder...</p>
+    <div class="d-flex justify-content-center">
+      <input type="submit" value="Create Post" class="btn btn-dark px-5 py-2" />
+    </div>
+  </form>
+</div>

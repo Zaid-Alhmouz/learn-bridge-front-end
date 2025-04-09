@@ -1,0 +1,28 @@
+#full-height {
+    height: 100vh;
+}
+
+.container-background {
+    background-color: #D9D9D9;
+}
+
+h1 {
+    color: #0000007b;
+}
+
+form {
+    width: 60% !important;
+}
+
+textarea {
+    border: 0;
+    border-radius: 5px;
+    width: 100%;
+    height: 200px;
+    resize: none;
+    accent-color: rgb(43, 234, 255);
+}
+
+#price-input {
+    width: 40%;
+}
