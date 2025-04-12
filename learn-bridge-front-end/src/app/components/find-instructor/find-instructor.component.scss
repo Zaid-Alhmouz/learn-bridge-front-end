@@ -1,0 +1,36 @@
+#full-height {
+  height: 100vh;
+}
+
+.centered-content {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-bar {
+  width: 30%;
+  border: solid 5px rgb(190, 190, 190);
+  border-radius: 30px;
+}
+
+.search-bar:focus {
+  outline: none;
+}
+
+select,
+option {
+  color: #04ccbc;
+}
+
+.filter-btn {
+  margin-top: 25px;
+  color: #04ccbc;
+  font-weight: bolds;
+}
+
+.teachers-result {
+  height: 65vh;
+  padding: 20px;
+  overflow-y: scroll;
+}

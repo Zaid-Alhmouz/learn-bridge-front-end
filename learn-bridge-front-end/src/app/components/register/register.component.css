@@ -196,8 +196,11 @@
 /* Tamer Styles */
 #container {
   height: 100vh;
-  width: 35%;
-  margin:auto;
+  width: 50%;
+  margin: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  
 }
 
 #signup-form {

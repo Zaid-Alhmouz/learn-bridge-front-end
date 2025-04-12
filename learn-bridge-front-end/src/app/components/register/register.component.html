@@ -1,169 +1,61 @@
-<!-- <div class="container">
-  <div class="signup-container">
-    <div class="signup-form">
-      <div class="title">Create an Account</div>
-      <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
-        <div class="input-boxes">
-          <div class="input-box">
-            <i class="fas fa-user"></i>
-            <input
-              type="text"
-              formControlName="name"
-              placeholder="Enter your name"
-              required
-            />
-            <div class="focus-indicator">
-            <div class="error-message" *ngIf="signupForm.get('name')?.invalid && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched)">
-              <span *ngIf="signupForm.get('name')?.errors?.['required']">Name is required</span>
-              <span *ngIf="signupForm.get('name')?.errors?.['minlength']">Name must be at least 2 characters</span>
-            </div>
-          </div>
-          
-          <div class="input-box">
-            <i class="fas fa-envelope"></i>
-            <input
-              type="email"
-              formControlName="email"
-              placeholder="Enter your email"
-              required
-            />
-            <div class="focus-indicator">
-            <div class="error-message" *ngIf="signupForm.get('email')?.invalid && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)">
-              <span *ngIf="signupForm.get('email')?.errors?.['required']">Email is required</span>
-              <span *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email</span>
-            </div>
-          </div>
-          
-          <div class="input-box">
-            <i class="fas fa-lock"></i>
-            <input
-              type="password"
-              formControlName="password"
-              placeholder="Enter your password"
-              required
-            />
-            <div class="focus-indicator">
-            <div class="error-message" *ngIf="signupForm.get('password')?.invalid && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)">
-              <span *ngIf="signupForm.get('password')?.errors?.['required']">Password is required</span>
-              <span *ngIf="signupForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters</span>
-              <span *ngIf="signupForm.get('password')?.errors?.['pattern']">Password must contain at least one letter and one number</span>
-            </div>
-          </div>
-          
-          <p *ngIf="errorMessage" class="alert alert-danger">{{errorMessage}}</p>
-
-          <div class="button input-box">
-            <input 
-              type="submit" 
-              value="{{ isLoading ? 'Signing Up...' : 'Sign Up' }}"
-            />
-            <div *ngIf="isLoading" class="spinner-overlay">
-              <div class="spinner"></div>
-            </div>
-          </div>
-          
-          <div class="text login-text">
-            Already have an account? <a routerLink="/login">Login</a>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-</div> -->
-
-<!-- Tamer Form UI -->
 <div
   id="container"
   class="d-flex flex-column justify-content-center align-items-center"
 >
-  <form
-    [formGroup]="signupForm"
-    (ngSubmit)="onSignupSubmit()"
-    id="signup-form"
-    class="pt-5 px-5 rounded-5 d-flex flex-column gap-3"
-  >
+  <form id="signup-form" class="pt-5 px-5 rounded-5 d-flex flex-column gap-3">
+    <!-- First and Last name entry -->
     <div class="d-flex gap-5">
-      <input
-        required
-        type="text"
-        class="form-control"
-        placeholder="First Name"
-      />
-      <input
-        required
-        type="text"
-        class="form-control"
-        placeholder="Last Name"
-      />
-    </div>
-    <div>
-      <input required type="email" class="form-control" placeholder="Email" />
-      <div class="focus-indicator">
-        <div
-          class="error-message"
-          *ngIf="
-            signupForm.get('email')?.invalid &&
-            (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)
-          "
-        >
-          <span *ngIf="signupForm.get('email')?.errors?.['required']"
-            >Email is required</span
-          >
-          <span *ngIf="signupForm.get('email')?.errors?.['email']"
-            >Please enter a valid email</span
-          >
-        </div>
+      <div>
+        <label class="form-label">First Name</label>
+        <input required type="text" class="form-control" />
+      </div>
+      <div>
+        <label class="form-label">Last Name</label>
+        <input required type="text" class="form-control" />
       </div>
     </div>
 
-    <select required class="form-select">
-      <option disabled selected>Role</option>
-      <option>Learner</option>
-      <option>Instructor</option>
-    </select>
-    <select required class="form-select">
-      <option disabled selected>Favorite Category</option>
-      <option>Category 1</option>
-      <option>Category 2</option>
-      <option>Category N</option>
-    </select>
+    <!-- Email -->
     <div>
-      <input
-        required
-        type="password"
-        class="form-control"
-        placeholder="Password"
-      />
-      <div class="focus-indicator">
-        <div
-          class="error-message"
-          *ngIf="
-            signupForm.get('password')?.invalid &&
-            (signupForm.get('password')?.dirty ||
-              signupForm.get('password')?.touched)
-          "
-        >
-          <span *ngIf="signupForm.get('password')?.errors?.['required']"
-            >Password is required</span
-          >
-          <span *ngIf="signupForm.get('password')?.errors?.['minlength']"
-            >Password must be at least 6 characters</span
-          >
-          <span *ngIf="signupForm.get('password')?.errors?.['pattern']"
-            >Password must contain at least one letter and one number</span
-          >
-        </div>
-      </div>
+      <label class="form-label">Email</label>
+      <input required type="email" class="form-control" />
     </div>
-    <input
-      required
-      type="password"
-      class="form-control"
-      placeholder="Confirm Password"
-    />
 
+    <!-- Register As -->
+    <div class="my-1">
+      <label class="form-label">Register As</label>
+      <select required class="form-select">
+        <option selected>Learner</option>
+        <option>Instructor</option>
+      </select>
+    </div>
+
+    <!-- Favorite Category -->
+    <div class="my-1">
+      <label class="form-label">Favorite Category</label>
+      <select required class="form-select">
+        <option selected>Category 1</option>
+        <option>Category 2</option>
+        <option>Category N</option>
+      </select>
+    </div>
+
+    <!-- Password -->
+    <div>
+      <label class="form-label">Password</label>
+      <input required type="password" class="form-control" />
+    </div>
+
+    <!-- Confirm Password -->
+    <div>
+      <label class="form-label">Confirm Password</label>
+      <input required type="password" class="form-control" />
+    </div>
+
+    <!-- Invalid Data -->
     <p class="alert alert-danger">Error Message Placeholder...</p>
 
+    <!-- Sign up -->
     <div class="d-flex justify-content-center">
       <input
         id="signup-btn"
@@ -172,63 +64,19 @@
         value="Sign up"
       />
     </div>
+
+    <!-- OR Divider -->
     <div class="d-flex align-items-center text-center">
       <hr class="flex-grow-1" />
       <span class="mx-3">or</span>
       <hr class="flex-grow-1" />
     </div>
-    <div class="d-flex justify-content-center">
-      <button id="google-signup" class="btn rounded-5 px-4">
-        <!-- Google Logo SVG -->
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="23px"
-          height="23px"
-          viewBox="0 0 32 32"
-          data-name="Layer 1"
-        >
-          <path
-            d="M23.75,16A7.7446,7.7446,0,0,1,8.7177,18.6259L4.2849,22.1721A13.244,13.244,0,0,0,29.25,16"
-            fill="#00ac47"
-          />
-          <path
-            d="M23.75,16a7.7387,7.7387,0,0,1-3.2516,6.2987l4.3824,3.5059A13.2042,13.2042,0,0,0,29.25,16"
-            fill="#4285f4"
-          />
-          <path
-            d="M8.25,16a7.698,7.698,0,0,1,.4677-2.6259L4.2849,9.8279a13.177,13.177,0,0,0,0,12.3442l4.4328-3.5462A7.698,7.698,0,0,1,8.25,16Z"
-            fill="#ffba00"
-          />
-          <polygon
-            fill="#2ab2db"
-            points="8.718 13.374 8.718 13.374 8.718 13.374 8.718 13.374"
-          />
-          <path
-            d="M16,8.25a7.699,7.699,0,0,1,4.558,1.4958l4.06-3.7893A13.2152,13.2152,0,0,0,4.2849,9.8279l4.4328,3.5462A7.756,7.756,0,0,1,16,8.25Z"
-            fill="#ea4435"
-          />
-          <polygon
-            fill="#2ab2db"
-            points="8.718 18.626 8.718 18.626 8.718 18.626 8.718 18.626"
-          />
-          <path
-            d="M29.25,15v1L27,19.5H16.5V14H28.25A1,1,0,0,1,29.25,15Z"
-            fill="#4285f4"
-          />
-        </svg>
-        Sign up with Google
-      </button>
-    </div>
+
+    <!-- Login -->
     <div class="d-flex justify-content-center mt-2">
       <p>
         Already have an account?
-        <button
-          routerLink="/login"
-          id="login-btn"
-          class="btn btn-dark border-0 rounded-3 px-4 fw-light"
-        >
-          Login
-        </button>
+        <a routerLink="/login" class="link-primary"> Login </a>
       </p>
     </div>
   </form>
