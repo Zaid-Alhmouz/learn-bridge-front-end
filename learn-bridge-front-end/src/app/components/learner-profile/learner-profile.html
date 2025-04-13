@@ -1,0 +1,48 @@
+<div id="details-container" class="container my-5">
+  <!-- Header -->
+  <header class="my-5">
+    <h1 class="fw-bold">Personal Details</h1>
+  </header>
+
+  <!-- Forms -->
+  <section class="d-flex my-5">
+    <!-- General Details Form -->
+    <form id="general-details" class="w-75 px-5 py-4 rounded-5">
+      <h2 class="fw-bold fs-4 my-4">General Details</h2>
+
+      <!-- First Name Field -->
+      <div class="mb-3">
+        <label class="form-label"> First Name </label>
+        <input type="text" class="form-control" />
+      </div>
+
+      <!-- Last Name Field -->
+      <div class="mb-3">
+        <label class="form-label"> Last Name </label>
+        <input type="text" class="form-control" />
+      </div>
+
+      <!-- Email Field -->
+      <div class="mb-3">
+        <label class="form-label"> Email </label>
+        <input type="email" class="form-control" />
+      </div>
+
+      <!-- Invalid data placeholder -->
+      <p class="alert alert-danger">Invalid data placeholder...</p>
+
+      <!-- Submit button -->
+      <input
+        type="submit"
+        value="Save Changes"
+        class="btn btn-dark rounded-pill px-5 py-2 my-3"
+      />
+    </form>
+
+    <!-- Edit Password Section -->
+    <section id="edit-password" class="mx-5 w-25 px-4 pb-3 rounded-5">
+      <h2 class="fw-bold fs-4 my-4">Edit Password</h2>
+      <button class="btn btn-dark rounded-pill px-4 py-2 w-100">Edit</button>
+    </section>
+  </section>
+</div>
