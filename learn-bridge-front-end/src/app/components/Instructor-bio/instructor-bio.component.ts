@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 
-// I don't understand this talasem: Tamer :)
 @Component({
   selector: 'app-instructor-bio',
-  templateUrl: './instructor-bio.html',
-  styleUrl: './instructor-bio.scss',
+  standalone: false,
+  templateUrl: './instructor-bio.component.html',
+  styleUrl: './instructor-bio.component.scss'
 })
-export class InstructorBio {}
+export class InstructorBioComponent {
+
+}

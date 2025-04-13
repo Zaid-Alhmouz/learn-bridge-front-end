@@ -1,37 +1,58 @@
-<div id="container" class="d-flex flex-column justify-content-center">
-  <form id="login-form">
-    <!-- Email -->
-    <div class="mb-4">
-      <label class="form-label">Email</label>
-      <input required type="email" class="form-control" />
-    </div>
-
-    <!-- Password -->
-    <div class="mb-4">
-      <label class="form-label">Password</label>
-      <input type="password" class="form-control" />
-    </div>
-
-    <!-- Invalid Data -->
-    <p class="alert alert-danger">Invalid data placeholder...</p>
-
-    <!-- Form Submissions -->
-    <div class="d-flex flex-column align-items-center gap-5">
-      <div>
-        <!-- Login -->
-        <button
-          type="submit"
-          class="px-4 py-2 btn btn-dark rounded-pill fw-light"
-        >
-          Login
+<div class="container">
+  <div class="login-container">
+    <h2 class="form-title">Login to Your Account</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()">
+      <!-- Email Field -->
+      <div class="input-box">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          required
+        />
+      </div>
+      
+       <div class="input-box">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          required
+        />
+      </div>
+      
+       <div class="forgot-password">
+        <a (click)="onForgotPassword()">Forgot password?</a>
+      </div>
+      
+       <div *ngIf="loginSubmitted && loginForm.invalid" class="alert alert-danger">
+        <div *ngIf="lf['email'].errors?.['required'] || lf['email'].errors?.['email']">
+          Please enter a valid email address
+        </div>
+        <div *ngIf="lf['password'].errors?.['required'] || lf['password'].errors?.['minlength']">
+          Password must be at least 6 characters
+        </div>
+      </div>
+      
+       <div *ngIf="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
+      </div>
+      
+       <div class="button-box">
+        <button 
+          type="submit" 
+          class="login-btn" 
+          [disabled]="isLoading">
+          <span *ngIf="!isLoading">Login</span>
+          <div *ngIf="isLoading" class="spinner"></div>
         </button>
       </div>
-
-      <!-- Register -->
-      <p class="fs-6">
-        Don't have an account ?
-        <a routerLink="/register" class="link-primary"> Sign Up </a>
-      </p>
-    </div>
-  </form>
+      
+      <div class="signup-text">
+        Don't have an account? <a [routerLink]="['/register']">Sign Up</a>
+      </div>
+    </form>
+  </div>
 </div>

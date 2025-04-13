@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import {HttpClientModule} from "@angular/common/http";
 import { CreatePostComponent } from './components/create-post/create-post.component';
+import { InstructorBioComponent } from './components/instructor-bio/instructor-bio.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
     NavAuthComponent,
     AuthLayoutComponent,
     BlankLayoutComponent,
-    CreatePostComponent,   
+    CreatePostComponent,
+    InstructorBioComponent,   
   ],
   imports: [
     BrowserModule,

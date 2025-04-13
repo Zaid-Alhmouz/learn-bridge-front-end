@@ -1,207 +1,155 @@
-/* Base styles */
-.container {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #f4f4f4;
-  padding: 30px;
-}
-
-.login-container {
-  max-width: 500px;
-  width: 100%;
-  background: #fff;
-  padding: 40px 30px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
-/* Form title */
-.login-form .title {
-  position: relative;
-  font-size: 24px;
-  font-weight: 500;
-  color: #333;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.login-form .title:before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -5px;
-  transform: translateX(-50%);
-  height: 3px;
-  width: 50px;
-  background: #03ccba;
-}
-
-/* Input boxes */
-.login-form .input-boxes {
-  margin-top: 30px;
-}
-
-.input-box {
-  display: flex;
-  align-items: center;
-  height: 50px;
-  width: 100%;
-  margin: 10px 0;
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.input-box input {
-  height: 100%;
-  width: 100%;
-  outline: none;
-  border: 1px solid #ddd;
-  padding: 0 30px;
-  font-size: 16px;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-}
-
-.input-box i {
-  position: absolute;
-  color: #03ccba;
-  font-size: 17px;
-  left: 10px;
-  z-index: 10;
-}
-
-/* Forgot password */
-.forgot-password {
-  text-align: right;
-  margin-bottom: 15px;
-}
-
-.forgot-password a {
-  color: #03ccba;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.forgot-password a:hover {
-  text-decoration: underline;
-}
-
-/* Error messages */
-.error-message {
-  font-size: 12px;
-  color: #e74c3c;
-  margin-top: 5px;
-  font-weight: 500;
-}
-
-/* Button styles */
-.button input {
-  color: #fff;
-  background: #03ccba;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  height: 100%;
-  width: 100%;
-}
-
-.button input:hover {
-  background: #02a698;
-}
-
-.button input[disabled] {
-  background: #ccc;
-  cursor: not-allowed;
-}
-
-/* Signup text */
-.signup-text {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 14px;
-}
-
-.signup-text a {
-  color: #02a698;
-  text-decoration: none;
-}
-
-.signup-text a:hover {
-  text-decoration: underline;
-}
-
-/* Alert styles */
-.alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  padding: 10px;
-  border-radius: 5px;
-  margin-top: 15px;
-  text-align: center;
-}
-
-/* Animations */
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-  20%, 40%, 60%, 80% { transform: translateX(5px); }
-}
-
-.input-box input.ng-invalid.ng-touched {
-  animation: shake 0.5s;
-  border-color: #e74c3c;
-}
-
-.spinner-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.7);
-  z-index: 10;
-}
-
-.spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-
-// Styles here made by Tamer
-#container {
-  height: 100vh;
-  width: 40%;
-  margin: auto;
-}
-
-#login-form {
-  padding: 45px 25px 0px 25px;
-  background-color: #d9d9d9;
-  border-radius: 30px;
-}
-
-#sign-up-btn {
-  background-color: #03ccba;
-}
-
-#sign-up-btn:hover {
-  background-color: #02a698;
-  color: white;
-}
+ .container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f4f4f4;
+    padding: 30px;
+  }
+  
+  .login-container {
+    max-width: 400px;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-radius: 10px;
+  }
+  
+  .form-title {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .input-box {
+    width: 100%;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  /* Label styles */
+  .input-box label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+  }
+  
+   .input-box input {
+    width: 100%;
+    height: 45px;
+    padding: 0 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 14px;
+    outline: none;
+    color: #333;
+  }
+  
+   .input-box input:focus {
+    border-color: #00D1C1;
+    box-shadow: 0 0 0 2px rgba(0, 209, 193, 0.1);
+  }
+  
+   .forgot-password {
+    text-align: right;
+    margin-bottom: 15px;
+  }
+  
+  .forgot-password a {
+    color: #00D1C1;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+  
+   .button-box {
+    margin-top: 20px;
+  }
+  
+  .login-btn {
+    width: 100%;
+    height: 45px;
+    background-color: #00D1C1;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .login-btn:hover {
+    background-color: #00b3a4;
+  }
+  
+  .login-btn:disabled {
+    background-color: #a0a0a0;
+    cursor: not-allowed;
+  }
+  
+   .signup-text {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .signup-text a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .signup-text a:hover {
+    text-decoration: underline;
+  }
+  
+   .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 13px;
+  }
+  
+  .alert-danger div {
+    margin-bottom: 4px;
+  }
+  
+  .alert-danger div:last-child {
+    margin-bottom: 0;
+  }
+  
+   .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+   button[disabled] {
+    position: relative;
+    color: transparent;
+  }

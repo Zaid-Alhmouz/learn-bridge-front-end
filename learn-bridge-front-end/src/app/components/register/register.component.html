@@ -1,83 +1,146 @@
-<div
-  id="container"
-  class="d-flex flex-column justify-content-center align-items-center"
->
-  <form id="signup-form" class="pt-5 px-5 rounded-5 d-flex flex-column gap-3">
-    <!-- First and Last name entry -->
-    <div class="d-flex gap-5">
-      <div>
-        <label class="form-label">First Name</label>
-        <input required type="text" class="form-control" />
+<div class="container">
+  <div class="signup-container">
+    <h2 class="form-title">Create an Account</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSignupSubmit()">
+      <!-- Name Fields -->
+      <div class="form-row">
+        <div class="input-box half">
+          <label for="firstName">First Name</label>
+          <input
+            type="text"
+            id="firstName"
+            formControlName="firstName"
+            required
+          />
+        </div>
+        <div class="input-box half">
+          <label for="lastName">Last Name</label>
+          <input
+            type="text"
+            id="lastName"
+            formControlName="lastName"
+            required
+          />
+        </div>
       </div>
-      <div>
-        <label class="form-label">Last Name</label>
-        <input required type="text" class="form-control" />
+      
+      <!-- Email Field -->
+      <div class="input-box">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          required
+        />
       </div>
-    </div>
-
-    <!-- Email -->
-    <div>
-      <label class="form-label">Email</label>
-      <input required type="email" class="form-control" />
-    </div>
-
-    <!-- Register As -->
-    <div class="my-1">
-      <label class="form-label">Register As</label>
-      <select required class="form-select">
-        <option selected>Learner</option>
-        <option>Instructor</option>
-      </select>
-    </div>
-
-    <!-- Favorite Category -->
-    <div class="my-1">
-      <label class="form-label">Favorite Category</label>
-      <select required class="form-select">
-        <option selected>Category 1</option>
-        <option>Category 2</option>
-        <option>Category N</option>
-      </select>
-    </div>
-
-    <!-- Password -->
-    <div>
-      <label class="form-label">Password</label>
-      <input required type="password" class="form-control" />
-    </div>
-
-    <!-- Confirm Password -->
-    <div>
-      <label class="form-label">Confirm Password</label>
-      <input required type="password" class="form-control" />
-    </div>
-
-    <!-- Invalid Data -->
-    <p class="alert alert-danger">Error Message Placeholder...</p>
-
-    <!-- Sign up -->
-    <div class="d-flex justify-content-center">
-      <input
-        id="signup-btn"
-        class="btn rounded-4 px-5"
-        type="submit"
-        value="Sign up"
-      />
-    </div>
-
-    <!-- OR Divider -->
-    <div class="d-flex align-items-center text-center">
-      <hr class="flex-grow-1" />
-      <span class="mx-3">or</span>
-      <hr class="flex-grow-1" />
-    </div>
-
-    <!-- Login -->
-    <div class="d-flex justify-content-center mt-2">
-      <p>
-        Already have an account?
-        <a routerLink="/login" class="link-primary"> Login </a>
-      </p>
-    </div>
-  </form>
+      
+      <!-- Role Selection -->
+      <div class="input-box">
+        <label for="role">Role</label>
+        <select id="role" formControlName="role" required>
+          <option value="" disabled selected>Select your role</option>
+          <option value="learner">Learner</option>
+          <option value="instructor">Instructor</option>
+        </select>
+        <div class="dropdown-icon">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+      
+      <!-- Categories Selection -->
+      <div class="input-box">
+        <label for="favoriteCategories">Favorite Categories</label>
+        <select id="favoriteCategories" formControlName="favoriteCategories" required>
+          <option value="" disabled selected>Select a category</option>
+          <option value="art">Art</option>
+          <option value="technology">Technology</option>
+          <option value="music">Music</option>
+          <option value="science">Science</option>
+          <option value="languages">Languages</option>
+        </select>
+        <div class="dropdown-icon">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+      
+      <!-- Password Fields -->
+      <div class="input-box">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          required
+        />
+      </div>
+      
+      <div class="input-box">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          required
+        />
+      </div>
+      
+<!-- Form Error Alert (Only shows after submit) -->
+<div *ngIf="signupSubmitted && signupForm.invalid" class="alert alert-danger">
+  <div *ngIf="sf['firstName'].errors?.['required'] || sf['firstName'].errors?.['minlength']">
+    First name must be at least 2 characters
+  </div>
+  <div *ngIf="sf['lastName'].errors?.['required'] || sf['lastName'].errors?.['minlength']">
+    Last name must be at least 2 characters
+  </div>
+  <div *ngIf="sf['email'].errors?.['required'] || sf['email'].errors?.['email']">
+    Please enter a valid email address
+  </div>
+  <div *ngIf="sf['role'].errors?.['required']">
+    Please select a role
+  </div>
+  <div *ngIf="sf['favoriteCategories'].errors?.['required']">
+    Please select a category
+  </div>
+  <div *ngIf="sf['password'].errors?.['required'] || sf['password'].errors?.['minlength'] || sf['password'].errors?.['pattern']">
+    Password must be at least 6 characters and contain at least one letter and one number
+  </div>
+  <div *ngIf="sf['confirmPassword'].errors?.['required'] || sf['confirmPassword'].errors?.['mustMatch']">
+    Passwords do not match
+  </div>
+</div>
+      
+      <!-- API Error Alert -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
+      </div>
+      
+      <!-- Submit Button -->
+      <div class="button-box">
+        <button 
+          type="submit" 
+          class="signup-btn" 
+          [disabled]="isLoading">
+          <span *ngIf="!isLoading">Sign up</span>
+          <div *ngIf="isLoading" class="spinner"></div>
+        </button>
+      </div>
+      
+      <div class="divider">
+        <span>or</span>
+      </div>
+      
+      <!-- Google Sign Up -->
+      <div class="google-signup">
+        <button type="button" class="google-btn" (click)="signUpWithGoogle()">
+          <img src="./assets/SVG/google-icon.svg" alt="Google">
+          Sign up with Google
+        </button>
+      </div>
+      
+      <div class="login-text">
+        Already have an account? <a [routerLink]="['/login']">Login</a>
+      </div>
+    </form>
+  </div>
 </div>

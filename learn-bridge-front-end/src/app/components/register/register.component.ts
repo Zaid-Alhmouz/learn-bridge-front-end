@@ -12,9 +12,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit {
   signupForm: FormGroup;
-  signupSubmitted = false;
+  isLoading = false;
   errorMessage: string = '';
-  isLoading = false; // New loading state
+  signupSubmitted = false;
 
   constructor(
     private _FormBuilder: FormBuilder,
@@ -23,9 +23,12 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Initialize signup form with validators
     this.signupForm = this._FormBuilder.group({
-      name: ['', [
+      firstName: ['', [
+        Validators.required,
+        Validators.minLength(2)
+      ]],
+      lastName: ['', [
         Validators.required,
         Validators.minLength(2)
       ]],
@@ -33,12 +36,45 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.email
       ]],
+      role: ['', [
+        Validators.required
+      ]],
+      favoriteCategories: ['', [
+        Validators.required
+      ]],
       password: ['', [
         Validators.required,
         Validators.minLength(6),
         Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,}$')
+      ]],
+      confirmPassword: ['', [
+        Validators.required
       ]]
+    }, {
+      validators: this.mustMatch('password', 'confirmPassword')
     });
+
+    this.signupForm.get('role')?.valueChanges.subscribe(role => {
+      console.log('Selected role:', role);
+    });
+  }
+
+  // Custom validator to check if password and confirm password match
+  mustMatch(controlName: string, matchingControlName: string) {
+    return (formGroup: FormGroup) => {
+      const control = formGroup.controls[controlName];
+      const matchingControl = formGroup.controls[matchingControlName];
+
+      if (matchingControl.errors && !matchingControl.errors['mustMatch']) {
+        return;
+      }
+
+      if (control.value !== matchingControl.value) {
+        matchingControl.setErrors({ mustMatch: true });
+      } else {
+        matchingControl.setErrors(null);
+      }
+    };
   }
 
   // Getter for easy access to form fields
@@ -77,11 +113,18 @@ export class RegisterComponent implements OnInit {
   // }
 
   // ******************************************************************************
+
+
+
+
+
+
+  
   onSignupSubmit() {
     this.signupSubmitted = true;
 
+    // Stop here if form is invalid
     if (this.signupForm.invalid) {
-      this.signupForm.markAllAsTouched();
       return;
     }
 
@@ -89,19 +132,55 @@ export class RegisterComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = ''; // Clear any previous error messages
 
-    this._AuthService.setRegister(this.signupForm.value).subscribe({
+    // Format the data according to your API requirements
+    const userData = {
+      name: `${this.signupForm.value.firstName} ${this.signupForm.value.lastName}`,
+      email: this.signupForm.value.email,
+      password: this.signupForm.value.password,
+      role: this.signupForm.value.role,
+      favoriteCategories: this.signupForm.value.favoriteCategories
+    };
+
+    this._AuthService.setRegister(userData).subscribe({
       next: (response) => {
-        // Explicitly navigate to login page
-          this._Router.navigate(['/login']);
-        // Ensure loading state is reset
         this.isLoading = false;
+        
+        // If the selected role is "instructor", navigate to instructor-bio page
+        if (this.signupForm.value.role === 'instructor') {
+          this._Router.navigate(['/instructor-bio']);
+        } else {
+          // Otherwise navigate to login
+          this._Router.navigate(['/login']);
+        }
       },
-      error: (error) => {
+      error: (error: HttpErrorResponse) => {
         // Set error message and reset loading state
-        this.errorMessage = error.error.message || 'Registration failed';
+        this.errorMessage = error.error.message || 'Registration failed. Please try again.';
         this.isLoading = false;
       }
     });
+  }
+
+  // Method to handle Google sign up
+  signUpWithGoogle() {
+    // this.isLoading = true;
+    // this.errorMessage = '';
+    
+    // this._AuthService.signUpWithGoogle().subscribe({
+    //   next: (response) => {
+    //     this.isLoading = false;
+    //     // Navigate based on user role from Google response
+    //     if (response.role === 'instructor') {
+    //       this._Router.navigate(['/instructor-bio']);
+    //     } else {
+    //       this._Router.navigate(['/login']);
+    //     }
+    //   },
+    //   error: (error: HttpErrorResponse) => {
+    //     this.errorMessage = error.error.message || 'Google signup failed. Please try again.';
+    //     this.isLoading = false;
+    //   }
+    // });
   }
 }
 

@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   loginSubmitted = false;
   errorMessage: string = '';
   isLoading = false;
+
   constructor(
     private _FormBuilder: FormBuilder,
     private _AuthService: AuthService,
@@ -23,8 +24,7 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // Initialize login form with validators
-    this.loginForm = this._FormBuilder.group({
+     this.loginForm = this._FormBuilder.group({
       email: ['', [
         Validators.required,
         Validators.email
@@ -35,46 +35,32 @@ export class LoginComponent implements OnInit {
       ]]
     });
   }
-
-  // Getter for easy access to form fields
-  get lf() { return this.loginForm.controls; }
+   get lf() { return this.loginForm.controls; }
 
   onLoginSubmit() {
     this.loginSubmitted = true;
-    this.isLoading = true;
-    if (this.loginForm.invalid) {
-      const invalidControls = document.querySelectorAll('.login-form .ng-invalid');
-      invalidControls.forEach(element => {
-        element.classList.add('shake');
-        setTimeout(() => element.classList.remove('shake'), 500);
-      });
-
-      this.loginForm.markAllAsTouched();
-
+    
+     if (this.loginForm.invalid) {
       return;
     }
+    
+     this.isLoading = true;
+    this.errorMessage = '';  
 
     this._AuthService.setLogin(this.loginForm.value).subscribe({
       next: (response) => {
-        this.errorMessage = '';
-
-        // localStorage.setItem("eToken", response.token);
-        // this._AuthService.decodeUserData()
-
-        this._Router.navigate(['/blank/home']);
         this.isLoading = false;
+        
+         this._Router.navigate(['/blank/home']);
       },
       error: (error: HttpErrorResponse) => {
-        // Optional: You could add a similar shake animation for error cases
-        this.loginSubmitted = false; // Reset submission flag on error
-        this.errorMessage = error.error.message || 'Login failed. Please check your credentials.';
+         this.errorMessage = error.error.message || 'Login failed. Please check your credentials.';
         this.isLoading = false;
       }
     });
   }
 
-  // Optional: Add forgot password navigation
-  onForgotPassword() {
+   onForgotPassword() {
     this._Router.navigate(['/forgot-password']);
   }
 }
