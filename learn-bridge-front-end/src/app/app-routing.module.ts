@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { InstructorBio } from './components/Instructor-bio/instructor-bio.component';
+import { LearnerProfile } from './components/learner-profile/learner-profile.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,10 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent, title: "Home" },
       { path: 'findinstructor', component: FindInstructorComponent, title: "Find Instructor" },
       { path: 'posts', component: PostsComponent, title: "Posts" },
+      { path: 'learnerprofile', component: LearnerProfile, title: "Learner Profile" },
+      { path: 'instructorbio', component: InstructorBio, title: "Instructor Bio"},
+      { path: 'createpost', component: CreatePostComponent, title: "CreatePost" },
+      { path: 'myposts', component: MyPostsComponent, title: "Myposts" },
     ]
   },
   {
@@ -34,9 +39,6 @@ const routes: Routes = [
       { path: 'findinstructor', component: FindInstructorComponent, title: "Find Instructor" },
       { path: 'posts', component: PostsComponent, title: "Posts" },
       { path: 'payment', component: PaymentComponent, title: "Payment" },
-      { path: 'myposts', component: MyPostsComponent, title: "Myposts" },
-      { path: 'createpost', component: CreatePostComponent, title: "CreatePost" },
-      { path: 'instructorbio', component: InstructorBio, title: "Instructor Bio"}
     ]
   },
 
