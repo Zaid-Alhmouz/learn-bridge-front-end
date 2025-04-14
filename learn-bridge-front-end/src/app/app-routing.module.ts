@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { BlankLayoutComponent } from './components/blank-layout/blank-layout.component';
 import { AuthLayoutComponent } from './components/auth-layout/auth-layout.component';
@@ -13,38 +12,55 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { InstructorBioComponent } from './components/instructor-bio/instructor-bio.component';
-
+import { AddCardComponent } from './components/add-card/add-card.component';
 
 const routes: Routes = [
-
   {
-    path: '', component: AuthLayoutComponent, children: [
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'home', component: HomeComponent, title: "Home" },
-      { path: 'findinstructor', component: FindInstructorComponent, title: "Find Instructor" },
-      { path: 'posts', component: PostsComponent, title: "Posts" },
-    ]
+      { path: 'home', component: HomeComponent, title: 'Home' },
+      {
+        path: 'findinstructor',
+        component: FindInstructorComponent,
+        title: 'Find Instructor',
+      },
+      { path: 'myposts', component: MyPostsComponent, title: 'Myposts' },
+      {
+        path: 'createpost',
+        component: CreatePostComponent,
+        title: 'CreatePost',
+      },
+      {
+        path: 'instructorbio',
+        component: InstructorBioComponent,
+        title: 'Instructor Bio',
+      },
+      { path: 'posts', component: PostsComponent, title: 'Posts' },
+      { path: 'add-card', component: AddCardComponent, title: 'Add Card' },
+    ],
   },
   {
-    path: 'blank', component: BlankLayoutComponent, children: [
+    path: 'blank',
+    component: BlankLayoutComponent,
+    children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent, title: "Home" },
-      { path: 'findinstructor', component: FindInstructorComponent, title: "Find Instructor" },
-      { path: 'posts', component: PostsComponent, title: "Posts" },
-      { path: 'payment', component: PaymentComponent, title: "Payment" },
-      { path: 'myposts', component: MyPostsComponent, title: "Myposts" },
-      { path: 'createpost', component: CreatePostComponent, title: "CreatePost" },
-      { path: 'instructorbio', component: InstructorBioComponent, title: "Instructor Bio"}
-    ]
+      { path: 'home', component: HomeComponent, title: 'Home' },
+      { path: 'posts', component: PostsComponent, title: 'Posts' },
+      { path: 'payment', component: PaymentComponent, title: 'Payment' },
+    ],
   },
 
-  { path: '**', component: NotFoundComponent, title: 'NotFound' }
+  { path: '**', component: NotFoundComponent, title: 'NotFound' },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+  ],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
