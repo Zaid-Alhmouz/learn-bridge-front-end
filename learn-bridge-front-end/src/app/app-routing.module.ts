@@ -41,6 +41,7 @@ const routes: Routes = [
       },
       { path: 'posts', component: PostsComponent, title: 'Posts' },
       { path: 'add-card', component: AddCardComponent, title: 'Add Card' },
+      { path: 'payment', component: PaymentComponent, title: 'Payment' },
     ],
   },
   {
@@ -50,7 +51,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent, title: 'Home' },
       { path: 'posts', component: PostsComponent, title: 'Posts' },
-      { path: 'payment', component: PaymentComponent, title: 'Payment' },
+      
     ],
   },
 
