@@ -1,0 +1,40 @@
+#filter-button {
+  background-color: #d9d9d9;
+  outline: none;
+}
+
+#filter-button:hover {
+  background-color: #03ccba;
+}
+
+#edit-button {
+  background-color: #03ccba;
+}
+
+#edit-button:hover {
+  background-color: #d9d9d9;
+}
+
+#nav-container,
+#post {
+  background-color: #f7f7f7;
+}
+
+#sessions-container {
+  height: 65vh;
+  overflow-y: scroll;
+  direction: rtl;
+}
+
+#session {
+  direction: ltr !important;
+  background-color: #f7f7f7;
+}
+
+.text-cyan {
+  color: #03ccba;
+}
+
+#price-background {
+  background-color: #d9d9d9;
+}

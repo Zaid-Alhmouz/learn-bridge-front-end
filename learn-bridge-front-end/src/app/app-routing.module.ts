@@ -11,8 +11,10 @@ import { MyPostsComponent } from './components/my-posts/my-posts.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
-import { InstructorBioComponent } from './components/instructor-bio/instructor-bio.component';
 import { AddCardComponent } from './components/add-card/add-card.component';
+import { SessionHistory } from './components/session-history/session-history.component';
+import { InstructorBioComponent } from './components/instructor-bio/instructor-bio.component';
+import { LearnerProfile } from './components/learner-profile/learner-profile.component';
 
 const routes: Routes = [
   {
@@ -24,23 +26,33 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'home', component: HomeComponent, title: 'Home' },
       {
-        path: 'findinstructor',
+        path: 'find-instructor',
         component: FindInstructorComponent,
         title: 'Find Instructor',
       },
-      { path: 'myposts', component: MyPostsComponent, title: 'Myposts' },
+      { path: 'my-posts', component: MyPostsComponent, title: 'My Posts' },
       {
-        path: 'createpost',
+        path: 'create-post',
         component: CreatePostComponent,
         title: 'CreatePost',
       },
       {
-        path: 'instructorbio',
+        path: 'instructor-bio',
         component: InstructorBioComponent,
         title: 'Instructor Bio',
       },
       { path: 'posts', component: PostsComponent, title: 'Posts' },
       { path: 'add-card', component: AddCardComponent, title: 'Add Card' },
+      {
+        path: 'session-history',
+        component: SessionHistory,
+        title: 'Session History',
+      },
+      {
+        path: 'learner-profile',
+        component: LearnerProfile,
+        title: 'Learner Profile',
+      },
     ],
   },
   {
