@@ -16,6 +16,7 @@ import { SessionHistory } from './components/session-history/session-history.com
 import { InstructorBioComponent } from './components/instructor-bio/instructor-bio.component';
 import { LearnerProfile } from './components/learner-profile/learner-profile.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
+import { ReportComponent } from './components/report/report.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,7 @@ const routes: Routes = [
       { path: 'add-card', component: AddCardComponent, title: 'Add Card' },
       { path: 'payment', component: PaymentComponent, title: 'Payment' },
       { path: 'Edit-post', component: EditPostComponent, title: 'Edit-post' },
+      { path: 'report', component: ReportComponent, title: 'report' },
     ],
   },
   {
