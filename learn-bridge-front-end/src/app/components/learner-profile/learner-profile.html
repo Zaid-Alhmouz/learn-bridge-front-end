@@ -14,22 +14,39 @@
       <div class="mb-3">
         <label class="form-label"> First Name </label>
         <input type="text" class="form-control" />
+        <p class="form-text text-danger">First Name Error Placeholder</p>
       </div>
 
       <!-- Last Name Field -->
       <div class="mb-3">
         <label class="form-label"> Last Name </label>
         <input type="text" class="form-control" />
+        <p class="form-text text-danger">Last Name Error Placeholder</p>
       </div>
 
       <!-- Email Field -->
       <div class="mb-3">
         <label class="form-label"> Email </label>
         <input type="email" class="form-control" />
+        <p class="form-text text-danger">Email Error Placeholder</p>
       </div>
 
-      <!-- Invalid data placeholder -->
-      <p class="alert alert-danger">Invalid data placeholder...</p>
+      <div class="mb-3">
+        <select class="form-select">
+          <option selected disabled>Favorite Category</option>
+          <option>Category 1</option>
+          <option>Category 2</option>
+          <option>Category N</option>
+        </select>
+        <p class="form-text text-danger">
+          Selection Error Placeholder (if needed)
+        </p>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Profile Image</label>
+        <input class="form-control" type="file" />
+      </div>
 
       <!-- Submit button -->
       <input
@@ -40,9 +57,11 @@
     </form>
 
     <!-- Edit Password Section -->
-    <section id="edit-password" class="mx-5 w-25 px-4 pb-3 rounded-5">
+    <section id="edit-password" class="ms-5 w-25 px-4 pb-3 rounded-5">
       <h2 class="fw-bold fs-4 my-4">Edit Password</h2>
-      <button class="btn btn-dark rounded-pill px-4 py-2 w-100">Edit</button>
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-dark rounded-pill px-4 py-2 w-75">Edit</button>
+      </div>
     </section>
   </section>
 </div>
