@@ -15,6 +15,7 @@ import { AddCardComponent } from './components/add-card/add-card.component';
 import { SessionHistory } from './components/session-history/session-history.component';
 import { InstructorBioComponent } from './components/instructor-bio/instructor-bio.component';
 import { LearnerProfile } from './components/learner-profile/learner-profile.component';
+import { EditPostComponent } from './components/edit-post/edit-post.component';
 
 const routes: Routes = [
   {
@@ -43,20 +44,8 @@ const routes: Routes = [
       },
       { path: 'posts', component: PostsComponent, title: 'Posts' },
       { path: 'add-card', component: AddCardComponent, title: 'Add Card' },
-<<<<<<< HEAD
       { path: 'payment', component: PaymentComponent, title: 'Payment' },
-=======
-      {
-        path: 'session-history',
-        component: SessionHistory,
-        title: 'Session History',
-      },
-      {
-        path: 'learner-profile',
-        component: LearnerProfile,
-        title: 'Learner Profile',
-      },
->>>>>>> b46472b628ff8226a5d2f0f28dfe452c54e291a6
+      { path: 'Edit-post', component: EditPostComponent, title: 'Edit-post' },
     ],
   },
   {
