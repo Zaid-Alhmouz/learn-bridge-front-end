@@ -17,6 +17,7 @@ import { InstructorBioComponent } from './components/instructor-bio/instructor-b
 import { LearnerProfile } from './components/learner-profile/learner-profile.component';
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { ReportComponent } from './components/report/report.component';
+import { ChatComponent } from './components/chat/chat.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
       { path: 'payment', component: PaymentComponent, title: 'Payment' },
       { path: 'Edit-post', component: EditPostComponent, title: 'Edit-post' },
       { path: 'report', component: ReportComponent, title: 'report' },
+      { path: 'chat', component: ChatComponent, title: 'chat' },
     ],
   },
   {
@@ -57,7 +59,6 @@ const routes: Routes = [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent, title: 'Home' },
       { path: 'posts', component: PostsComponent, title: 'Posts' },
-      
     ],
   },
 
