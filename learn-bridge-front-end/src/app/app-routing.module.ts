@@ -12,9 +12,9 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { AddCardComponent } from './components/add-card/add-card.component';
-import { SessionHistory } from './components/session-history/session-history.component';
+
 import { InstructorBioComponent } from './components/instructor-bio/instructor-bio.component';
-import { LearnerProfile } from './components/learner-profile/learner-profile.component';
+
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { ReportComponent } from './components/report/report.component';
 import { ChatComponent } from './components/chat/chat.component';
