@@ -18,6 +18,7 @@ import { InstructorBioComponent } from './components/instructor-bio/instructor-b
 import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { ReportComponent } from './components/report/report.component';
 import { ChatComponent } from './components/chat/chat.component';
+import { AddRatingComponent } from './components/add-rating/add-rating.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,7 @@ const routes: Routes = [
       { path: 'Edit-post', component: EditPostComponent, title: 'Edit-post' },
       { path: 'report', component: ReportComponent, title: 'report' },
       { path: 'chat', component: ChatComponent, title: 'chat' },
+      { path: 'add-rating', component: AddRatingComponent, title: 'add-rating' },
     ],
   },
   {
