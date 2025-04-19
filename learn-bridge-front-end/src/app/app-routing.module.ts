@@ -21,6 +21,7 @@ import { ChatComponent } from './components/chat/chat.component';
 import { AddRatingComponent } from './components/add-rating/add-rating.component';
 import { PendingComponent } from './components/pending/pending.component';
 import { PendingReportsComponent } from './components/pendingreports/pendingreports.component';
+import { ViewProfileComponent } from './components/viewprofile/viewprofile.component';
 
 
 const routes: Routes = [
@@ -57,6 +58,7 @@ const routes: Routes = [
       { path: 'add-rating', component: AddRatingComponent, title: 'add-rating' },
       { path: 'pending', component: PendingComponent, title: 'pending' },
       { path: 'pendingreports', component: PendingReportsComponent, title: 'pendingreports' },
+      { path: 'viewprofile', component: ViewProfileComponent, title: 'viewprofile' },
       
     ],
   },
