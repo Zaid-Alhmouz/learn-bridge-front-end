@@ -20,6 +20,7 @@ import { ReportComponent } from './components/report/report.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { AddRatingComponent } from './components/add-rating/add-rating.component';
 import { PendingComponent } from './components/pending/pending.component';
+import { PendingReportsComponent } from './components/pendingreports/pendingreports.component';
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
       { path: 'chat', component: ChatComponent, title: 'chat' },
       { path: 'add-rating', component: AddRatingComponent, title: 'add-rating' },
       { path: 'pending', component: PendingComponent, title: 'pending' },
+      { path: 'pendingreports', component: PendingReportsComponent, title: 'pendingreports' },
       
     ],
   },

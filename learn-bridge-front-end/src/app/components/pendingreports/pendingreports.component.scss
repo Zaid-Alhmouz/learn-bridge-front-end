@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f41d;
+  color: #000;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 5rem auto;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  gap: 10px;
+}
+
+.page-btn {
+  background-color: white;
+  border: 2px solid #00d2c8;
+  color: #00d2c8;
+  font-weight: bold;
+  padding: 8px 16px;
+  margin: 0 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.page-btn:hover {
+  background-color: #00d2c8;
+  color: white;
+}
+
+.page-btn.active {
+  background-color: #00d2c8;
+  color: white;
+}
+.report-card {
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.report-info {
+  flex: 3;
+}
+
+.report-actions {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 1rem;
+  justify-content: center;
+}
+
+.highlight {
+  color: #00c4b4;
+}
+
+.description {
+  color: #555;
+  font-family: monospace;
+  line-height: 1.3;
+}
+
+.view-chat {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  background-color: #00d2c8;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.red {
+  background-color: #ff6f6f;
+  color: #000;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.block {
+  background-color: #ff6f6f;
+  color: #000;
+  border: none;
+  padding: 15px 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  line-height: 1.2;
+}
