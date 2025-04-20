@@ -22,7 +22,10 @@ import { AddRatingComponent } from './components/add-rating/add-rating.component
 import { PendingComponent } from './components/pending/pending.component';
 import { PendingReportsComponent } from './components/pendingreports/pendingreports.component';
 import { ViewProfileComponent } from './components/viewprofile/viewprofile.component';
-
+import { LearnerProfile } from './components/learner-profile/learner-profile.component';
+import { SessionHistory } from './components/session-history/session-history.component';
+import { InstructorProfile } from './components/Instructor-profile/Instructor-profile.component';
+import { AgreementComponent } from './components/agreement/agreement.component';
 
 const routes: Routes = [
   {
@@ -30,45 +33,77 @@ const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent },
+
+      // Faisal
       { path: 'home', component: HomeComponent, title: 'Home' },
+
+      // Tamer
       {
         path: 'find-instructor',
         component: FindInstructorComponent,
         title: 'Find Instructor',
       },
       { path: 'my-posts', component: MyPostsComponent, title: 'My Posts' },
+      { path: 'posts', component: PostsComponent, title: 'Posts' },
+      {
+        path: 'agreements',
+        component: AgreementComponent,
+        title: 'Agreement',
+      },
       {
         path: 'create-post',
         component: CreatePostComponent,
-        title: 'CreatePost',
+        title: 'Create Post',
       },
+      { path: 'login', component: LoginComponent, title: 'Login' },
+      { path: 'register', component: RegisterComponent, title: 'Register' },
       {
         path: 'instructor-bio',
         component: InstructorBioComponent,
         title: 'Instructor Bio',
       },
-      { path: 'posts', component: PostsComponent, title: 'Posts' },
+      {
+        path: 'instructor-profile',
+        component: InstructorProfile,
+        title: 'Instructor Profile',
+      },
+      {
+        path: 'learner-profile',
+        component: LearnerProfile,
+        title: 'learner profile',
+      },
       { path: 'add-card', component: AddCardComponent, title: 'Add Card' },
+      {
+        path: 'session-history',
+        component: SessionHistory,
+        title: 'Session History',
+      },
+
+      // Osama
       { path: 'payment', component: PaymentComponent, title: 'Payment' },
-      { path: 'Edit-post', component: EditPostComponent, title: 'Edit-post' },
-      { path: 'report', component: ReportComponent, title: 'report' },
-      { path: 'chat', component: ChatComponent, title: 'chat' },
-      { path: 'add-rating', component: AddRatingComponent, title: 'add-rating' },
-      { path: 'pending', component: PendingComponent, title: 'pending' },
-      { path: 'pendingreports', component: PendingReportsComponent, title: 'pendingreports' },
-      { path: 'viewprofile', component: ViewProfileComponent, title: 'viewprofile' },
-      
-    ],
-  },
-  {
-    path: 'blank',
-    component: BlankLayoutComponent,
-    children: [
-      { path: '', redirectTo: 'home', pathMatch: 'full' },
-      { path: 'home', component: HomeComponent, title: 'Home' },
-      { path: 'posts', component: PostsComponent, title: 'Posts' },
+      { path: 'edit-post', component: EditPostComponent, title: 'Edit Post' },
+      { path: 'report', component: ReportComponent, title: 'Report' },
+      { path: 'chat', component: ChatComponent, title: 'Chat' },
+      {
+        path: 'add-rating',
+        component: AddRatingComponent,
+        title: 'add-rating',
+      },
+      {
+        path: 'pending-posts',
+        component: PendingComponent,
+        title: 'Pending Posts',
+      },
+      {
+        path: 'pending-reports',
+        component: PendingReportsComponent,
+        title: 'Pending Reports',
+      },
+      {
+        path: 'view-profile',
+        component: ViewProfileComponent,
+        title: 'View Profile',
+      },
     ],
   },
 

@@ -4,8 +4,6 @@ import { Component } from '@angular/core';
   selector: 'pendingreports',
   standalone: false,
   templateUrl: './pendingreports.component.html',
-  styleUrl: './pendingreports.component.scss'
+  styleUrl: './pendingreports.component.scss',
 })
-export class PendingReportsComponent {
-
-}
+export class PendingReportsComponent {}
