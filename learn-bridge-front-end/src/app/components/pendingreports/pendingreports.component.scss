@@ -17,35 +17,38 @@ h1 {
   font-weight: 700;
   margin-bottom: 2rem;
 }
-.pagination {
+.pagination-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  height: 100%; /* centers vertically */
+}
+
+.pagination {
+  display: flex;
   gap: 10px;
+  list-style: none;
+  padding: 10px;
+  font-family: Arial, sans-serif;
 }
 
-.page-btn {
-  background-color: white;
-  border: 2px solid #00d2c8;
-  color: #00d2c8;
-  font-weight: bold;
-  padding: 8px 16px;
-  margin: 0 5px;
-  border-radius: 10px;
+.pagination li {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   cursor: pointer;
-  transition: 0.3s ease;
+  user-select: none;
 }
 
-.page-btn:hover {
+.pagination li.active {
   background-color: #00d2c8;
   color: white;
+  font-weight: bold;
+  border-color: #00d2c8;
 }
 
-.page-btn.active {
-  background-color: #00d2c8;
-  color: white;
+.pagination li:hover {
+  background-color: #ddd;
 }
 .report-card {
   background-color: white;
@@ -71,7 +74,7 @@ h1 {
 }
 
 .highlight {
-  color: #00c4b4;
+  color: #00d2c8;
 }
 
 .description {

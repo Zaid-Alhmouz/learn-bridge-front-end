@@ -17,7 +17,7 @@ body {
   margin-top: 40px;
 }
 .page.active {
-  background-color: #00d2c7;
+  background-color: #00d2c8;
   color: white;
   border: none;
 }
@@ -56,19 +56,19 @@ h1 {
 }
 
 .post-id span {
-  color: #00c0c0;
+  color: #00d2c8;
 }
 
 .math {
-  color: #00a1a1;
+  color: #00d2c8;
 }
 
 .soft {
-  color: #1e90ff;
+  color: #00d2c8;
 }
 
 .subject .link {
-  color: #0077cc;
+  color: #000000;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -87,7 +87,7 @@ h1 {
   border-radius: 20px;
   font-size: 14px;
   display: inline-block;
-}
+} 
 
 .actions-outer {
   display: flex;
@@ -107,7 +107,7 @@ button {
 }
 
 .accept {
-  background-color: #00d2c7;
+  background-color: #00d2c8;
   color: white;
 }
 

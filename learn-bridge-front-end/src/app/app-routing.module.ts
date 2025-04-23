@@ -19,13 +19,13 @@ import { EditPostComponent } from './components/edit-post/edit-post.component';
 import { ReportComponent } from './components/report/report.component';
 import { ChatComponent } from './components/chat/chat.component';
 import { AddRatingComponent } from './components/add-rating/add-rating.component';
-import { PendingComponent } from './components/pending/pending.component';
 import { PendingReportsComponent } from './components/pendingreports/pendingreports.component';
 import { ViewProfileComponent } from './components/viewprofile/viewprofile.component';
 import { LearnerProfile } from './components/learner-profile/learner-profile.component';
 import { SessionHistory } from './components/session-history/session-history.component';
 import { InstructorProfile } from './components/Instructor-profile/Instructor-profile.component';
 import { AgreementComponent } from './components/agreement/agreement.component';
+import { PendingPostsComponent } from './components/pending-posts/pending-posts.component';
 
 const routes: Routes = [
   {
@@ -84,26 +84,12 @@ const routes: Routes = [
       { path: 'edit-post', component: EditPostComponent, title: 'Edit Post' },
       { path: 'report', component: ReportComponent, title: 'Report' },
       { path: 'chat', component: ChatComponent, title: 'Chat' },
-      {
-        path: 'add-rating',
-        component: AddRatingComponent,
-        title: 'add-rating',
-      },
-      {
-        path: 'pending-posts',
-        component: PendingComponent,
-        title: 'Pending Posts',
-      },
-      {
-        path: 'pending-reports',
-        component: PendingReportsComponent,
-        title: 'Pending Reports',
-      },
-      {
-        path: 'view-profile',
-        component: ViewProfileComponent,
-        title: 'View Profile',
-      },
+      { path: 'pending-posts', component: PendingPostsComponent, title: 'Pending Posts' },
+      { path: 'add-rating',component: AddRatingComponent,title: 'add-rating',},
+      { path: 'pending-reports',component: PendingReportsComponent,title: 'Pending Reports',},
+      { path: 'view-profile',component: ViewProfileComponent,title: 'View Profile',},
+      
+
     ],
   },
 
