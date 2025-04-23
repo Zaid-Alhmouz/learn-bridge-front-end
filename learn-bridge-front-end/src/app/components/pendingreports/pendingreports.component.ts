@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'pendingreports',
+  selector: 'pending-reports',
   standalone: false,
   templateUrl: './pendingreports.component.html',
   styleUrl: './pendingreports.component.scss',

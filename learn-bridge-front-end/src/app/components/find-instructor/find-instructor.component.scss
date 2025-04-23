@@ -20,12 +20,12 @@
 
 select,
 option {
-  color: #04ccbc;
+  color: #000000;
 }
 
 .filter-btn {
   margin-top: 25px;
-  color: #04ccbc;
+  color: #000000;
   font-weight: bolds;
 }
 
@@ -33,4 +33,48 @@ option {
   height: 65vh;
   padding: 20px;
   overflow-y: scroll;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 40px;
+}
+.page.active {
+  background-color: #00d2c8;
+  color: white;
+  border: none;
+}
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* centers vertically */
+}
+
+.pagination {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.pagination li {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.pagination li.active {
+  background-color: #00d2c8;
+  color: white;
+  font-weight: bold;
+  border-color: #00d2c8;
+}
+
+.pagination li:hover {
+  background-color: #ddd;
 }
