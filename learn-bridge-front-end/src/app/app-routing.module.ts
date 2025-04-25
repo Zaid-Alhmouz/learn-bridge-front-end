@@ -26,6 +26,9 @@ import { SessionHistory } from './components/session-history/session-history.com
 import { InstructorProfile } from './components/Instructor-profile/Instructor-profile.component';
 import { AgreementComponent } from './components/agreement/agreement.component';
 import { PendingPostsComponent } from './components/pending-posts/pending-posts.component';
+import { CancelPopUpComponent } from './components/cancel-popup/cancel-popup.component';
+import { DeletePopUpComponent } from './components/delete-popup/delete-popup.component';
+import { CompletePopUpComponent } from './components/complete-popup/complete-popup.component';
 
 const routes: Routes = [
   {
@@ -88,8 +91,11 @@ const routes: Routes = [
       { path: 'add-rating',component: AddRatingComponent,title: 'add-rating',},
       { path: 'pending-reports',component: PendingReportsComponent,title: 'Pending Reports',},
       { path: 'view-profile',component: ViewProfileComponent,title: 'View Profile',},
+      { path: 'cancel-popup',component: CancelPopUpComponent,title: 'cancel-popup',},
+      { path: 'delete-popup',component: DeletePopUpComponent,title: 'delete-popup',},
+      { path: 'complete-popup',component: CompletePopUpComponent,title: 'complete-popup',}
       
-
+      
     ],
   },
 
