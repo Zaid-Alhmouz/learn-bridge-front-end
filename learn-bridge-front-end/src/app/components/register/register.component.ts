@@ -77,49 +77,88 @@ export class RegisterComponent implements OnInit {
     };
   }
 
+  // Helper methods to check field validity
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.signupForm.get(fieldName);
+    if (field != null)
+      return (field.invalid && (field.dirty || field.touched || this.signupSubmitted));
+    return false;
+  }
+
+  // Helper method to get appropriate error message for each field
+  getErrorMessage(fieldName: string): string {
+    const field = this.signupForm.get(fieldName);
+
+    if (!field || !field.errors) {
+      return '';
+    }
+
+    if (fieldName === 'firstName') {
+      if (field.errors['required']) {
+        return 'First name is required';
+      }
+      if (field.errors['minlength']) {
+        return 'First name must be at least 2 characters';
+      }
+    }
+
+    if (fieldName === 'lastName') {
+      if (field.errors['required']) {
+        return 'Last name is required';
+      }
+      if (field.errors['minlength']) {
+        return 'Last name must be at least 2 characters';
+      }
+    }
+
+    if (fieldName === 'email') {
+      if (field.errors['required']) {
+        return 'Email is required';
+      }
+      if (field.errors['email']) {
+        return 'Please enter a valid email address';
+      }
+    }
+
+    if (fieldName === 'role') {
+      if (field.errors['required']) {
+        return 'Please select a role';
+      }
+    }
+
+    if (fieldName === 'favoriteCategories') {
+      if (field.errors['required']) {
+        return 'Please select a category';
+      }
+    }
+
+    if (fieldName === 'password') {
+      if (field.errors['required']) {
+        return 'Password is required';
+      }
+      if (field.errors['minlength']) {
+        return 'Password must be at least 6 characters';
+      }
+      if (field.errors['pattern']) {
+        return 'Password must contain at least one letter and one number';
+      }
+    }
+
+    if (fieldName === 'confirmPassword') {
+      if (field.errors['required']) {
+        return 'Please confirm your password';
+      }
+      if (field.errors['mustMatch']) {
+        return 'Passwords do not match';
+      }
+    }
+
+    return '';
+  }
+
   // Getter for easy access to form fields
   get sf() { return this.signupForm.controls; }
 
-  // onSignupSubmit() {
-  //   this.signupSubmitted = true;
-
-  //   // Stop here if form is invalid
-  //   if (this.signupForm.invalid) {
-  //     // Add shake animation to invalid fields
-  //     const invalidControls = document.querySelectorAll('.signup-form .ng-invalid');
-
-  //     invalidControls.forEach(element => {
-  //       element.classList.add('shake');
-  //       setTimeout(() => element.classList.remove('shake'), 500);
-  //     });
-
-  //     return;
-  //   }
-
-  //   // Add success animation
-  //   document.querySelector('.signup-form')?.classList.add('form-submitted');
-
-  //   // Call the registration service
-  //   this._AuthService.setRegister(this.signupForm.value).subscribe({
-  //     next: (response) => {
-
-  //       // navigate to login or dashboard
-  //       this._Router.navigate(['/login']);
-  //     },
-  //     error: (error: HttpErrorResponse) => {
-  //       this.errorMessage = error.error.message;
-  //     }
-  //   });
-  // }
-
-  // ******************************************************************************
-
-
-
-
-
-
-  
   onSignupSubmit() {
     this.signupSubmitted = true;
 
@@ -144,7 +183,7 @@ export class RegisterComponent implements OnInit {
     this._AuthService.setRegister(userData).subscribe({
       next: (response) => {
         this.isLoading = false;
-        
+
         // If the selected role is "instructor", navigate to instructor-bio page
         if (this.signupForm.value.role === 'instructor') {
           this._Router.navigate(['/instructor-bio']);
@@ -163,24 +202,6 @@ export class RegisterComponent implements OnInit {
 
   // Method to handle Google sign up
   signUpWithGoogle() {
-    // this.isLoading = true;
-    // this.errorMessage = '';
-    
-    // this._AuthService.signUpWithGoogle().subscribe({
-    //   next: (response) => {
-    //     this.isLoading = false;
-    //     // Navigate based on user role from Google response
-    //     if (response.role === 'instructor') {
-    //       this._Router.navigate(['/instructor-bio']);
-    //     } else {
-    //       this._Router.navigate(['/login']);
-    //     }
-    //   },
-    //   error: (error: HttpErrorResponse) => {
-    //     this.errorMessage = error.error.message || 'Google signup failed. Please try again.';
-    //     this.isLoading = false;
-    //   }
-    // });
+    // Implementation remains unchanged
   }
 }
-

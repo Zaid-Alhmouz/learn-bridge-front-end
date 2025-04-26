@@ -11,9 +11,12 @@
           formControlName="email"
           required
         />
+        <div *ngIf="isFieldInvalid('email')" class="validation-error">
+          {{ getErrorMessage('email') }}
+        </div>
       </div>
       
-       <div class="input-box">
+      <div class="input-box">
         <label for="password">Password</label>
         <input
           type="password"
@@ -21,26 +24,20 @@
           formControlName="password"
           required
         />
+        <div *ngIf="isFieldInvalid('password')" class="validation-error">
+          {{ getErrorMessage('password') }}
+        </div>
       </div>
       
-       <div class="forgot-password">
+      <div class="forgot-password">
         <a (click)="onForgotPassword()">Forgot password?</a>
       </div>
       
-       <div *ngIf="loginSubmitted && loginForm.invalid" class="alert alert-danger">
-        <div *ngIf="lf['email'].errors?.['required'] || lf['email'].errors?.['email']">
-          Please enter a valid email address
-        </div>
-        <div *ngIf="lf['password'].errors?.['required'] || lf['password'].errors?.['minlength']">
-          Password must be at least 6 characters
-        </div>
-      </div>
-      
-       <div *ngIf="errorMessage" class="alert alert-danger">
+      <div *ngIf="errorMessage" class="alert alert-danger">
         {{errorMessage}}
       </div>
       
-       <div class="button-box">
+      <div class="button-box">
         <button 
           type="submit" 
           class="login-btn" 

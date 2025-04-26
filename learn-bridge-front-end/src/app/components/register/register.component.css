@@ -217,6 +217,13 @@
   margin-bottom: 0;
 }
 
+/* Validation error styles */
+.validation-error {
+  color: #721c24;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
 /* Spinner Styles */
 .spinner {
   width: 20px;

@@ -12,6 +12,9 @@
             formControlName="firstName"
             required
           />
+          <div *ngIf="isFieldInvalid('firstName')" class="validation-error">
+            {{ getErrorMessage('firstName') }}
+          </div>
         </div>
         <div class="input-box half">
           <label for="lastName">Last Name</label>
@@ -21,6 +24,9 @@
             formControlName="lastName"
             required
           />
+          <div *ngIf="isFieldInvalid('lastName')" class="validation-error">
+            {{ getErrorMessage('lastName') }}
+          </div>
         </div>
       </div>
       
@@ -33,6 +39,9 @@
           formControlName="email"
           required
         />
+        <div *ngIf="isFieldInvalid('email')" class="validation-error">
+          {{ getErrorMessage('email') }}
+        </div>
       </div>
       
       <!-- Role Selection -->
@@ -45,6 +54,9 @@
         </select>
         <div class="dropdown-icon">
           <i class="fas fa-chevron-down"></i>
+        </div>
+        <div *ngIf="isFieldInvalid('role')" class="validation-error">
+          {{ getErrorMessage('role') }}
         </div>
       </div>
       
@@ -62,6 +74,9 @@
         <div class="dropdown-icon">
           <i class="fas fa-chevron-down"></i>
         </div>
+        <div *ngIf="isFieldInvalid('favoriteCategories')" class="validation-error">
+          {{ getErrorMessage('favoriteCategories') }}
+        </div>
       </div>
       
       <!-- Password Fields -->
@@ -73,6 +88,9 @@
           formControlName="password"
           required
         />
+        <div *ngIf="isFieldInvalid('password')" class="validation-error">
+          {{ getErrorMessage('password') }}
+        </div>
       </div>
       
       <div class="input-box">
@@ -83,32 +101,10 @@
           formControlName="confirmPassword"
           required
         />
+        <div *ngIf="isFieldInvalid('confirmPassword')" class="validation-error">
+          {{ getErrorMessage('confirmPassword') }}
+        </div>
       </div>
-      
-<!-- Form Error Alert (Only shows after submit) -->
-<div *ngIf="signupSubmitted && signupForm.invalid" class="alert alert-danger">
-  <div *ngIf="sf['firstName'].errors?.['required'] || sf['firstName'].errors?.['minlength']">
-    First name must be at least 2 characters
-  </div>
-  <div *ngIf="sf['lastName'].errors?.['required'] || sf['lastName'].errors?.['minlength']">
-    Last name must be at least 2 characters
-  </div>
-  <div *ngIf="sf['email'].errors?.['required'] || sf['email'].errors?.['email']">
-    Please enter a valid email address
-  </div>
-  <div *ngIf="sf['role'].errors?.['required']">
-    Please select a role
-  </div>
-  <div *ngIf="sf['favoriteCategories'].errors?.['required']">
-    Please select a category
-  </div>
-  <div *ngIf="sf['password'].errors?.['required'] || sf['password'].errors?.['minlength'] || sf['password'].errors?.['pattern']">
-    Password must be at least 6 characters and contain at least one letter and one number
-  </div>
-  <div *ngIf="sf['confirmPassword'].errors?.['required'] || sf['confirmPassword'].errors?.['mustMatch']">
-    Passwords do not match
-  </div>
-</div>
       
       <!-- API Error Alert -->
       <div *ngIf="errorMessage" class="alert alert-danger">

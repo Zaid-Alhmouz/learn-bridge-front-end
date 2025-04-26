@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private _FormBuilder: FormBuilder,
     private _AuthService: AuthService,
     private _Router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loginForm = this._FormBuilder.group({
@@ -28,8 +28,41 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
+
   get lf() {
     return this.loginForm.controls;
+  }
+
+  // Helper methods to check field validity
+  isFieldInvalid(fieldName: string): boolean {
+    const field = this.loginForm.get(fieldName);
+    if (field != null)
+      return (field.invalid && (field.dirty || field.touched || this.loginSubmitted));
+    return false;
+  }
+
+  getErrorMessage(fieldName: string): string {
+    const field = this.loginForm.get(fieldName);
+    if (field != null)
+      if (fieldName === 'email') {
+        if (field.errors?.['required']) {
+          return 'Email is required';
+        }
+        if (field.errors?.['email']) {
+          return 'Please enter a valid email address';
+        }
+      }
+    if (field != null)
+      if (fieldName === 'password') {
+        if (field.errors?.['required']) {
+          return 'Password is required';
+        }
+        if (field.errors?.['minlength']) {
+          return 'Password must be at least 6 characters';
+        }
+      }
+
+    return '';
   }
 
   onLoginSubmit() {
@@ -45,7 +78,6 @@ export class LoginComponent implements OnInit {
     this._AuthService.setLogin(this.loginForm.value).subscribe({
       next: (response) => {
         this.isLoading = false;
-
         this._Router.navigate(['/blank/home']);
       },
       error: (error: HttpErrorResponse) => {
