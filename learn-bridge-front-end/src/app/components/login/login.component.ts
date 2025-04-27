@@ -65,28 +65,64 @@ export class LoginComponent implements OnInit {
     return '';
   }
 
+  // onLoginSubmit() {
+  //   this.loginSubmitted = true;
+
+  //   if (this.loginForm.invalid) {
+  //     return;
+  //   }
+
+  //   this.isLoading = true;
+  //   this.errorMessage = '';
+
+  //   this._AuthService.setLogin(this.loginForm.value).subscribe({
+  //     next: (response) => {
+  //       this.isLoading = false;
+  //       this._Router.navigate(['/blank/home']);
+  //     },
+  //     error: (error: HttpErrorResponse) => {
+  //       this.errorMessage =
+  //         error.error.message || 'Login failed. Please check your credentials.';
+  //       this.isLoading = false;
+  //     },
+  //   });
+  // }
+
+
   onLoginSubmit() {
     this.loginSubmitted = true;
-
+  
     if (this.loginForm.invalid) {
       return;
     }
-
+  
     this.isLoading = true;
     this.errorMessage = '';
-
+  
     this._AuthService.setLogin(this.loginForm.value).subscribe({
-      next: (response) => {
+      next: (token: any) => {
         this.isLoading = false;
-        this._Router.navigate(['/blank/home']);
+        
+        localStorage.setItem('eToken', token);  
+        this._AuthService.decodeUserData();    
+        
+        const userRole = this._AuthService.userData?.role;  
+  
+        if (userRole === 'INSTRUCTOR') {
+          this._Router.navigate(['/instructor/home']);
+        } else if (userRole === 'LEARNER') {
+          this._Router.navigate(['/learner']);
+        } else {
+          this._Router.navigate(['/login']); 
+        }
       },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage =
-          error.error.message || 'Login failed. Please check your credentials.';
+      error: (error: any) => {
+        this.errorMessage = 'Login failed. Please check your credentials.';
         this.isLoading = false;
-      },
+      }
     });
   }
+  
 
   onForgotPassword() {
     this._Router.navigate(['/forgot-password']);

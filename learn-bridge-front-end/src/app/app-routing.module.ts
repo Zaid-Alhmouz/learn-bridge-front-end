@@ -29,78 +29,124 @@ import { PendingPostsComponent } from './components/pending-posts/pending-posts.
 import { CancelPopUpComponent } from './components/cancel-popup/cancel-popup.component';
 import { DeletePopUpComponent } from './components/delete-popup/delete-popup.component';
 import { CompletePopUpComponent } from './components/complete-popup/complete-popup.component';
+import { InstructorLayoutComponent } from './components/instructor-layout/instructor-layout.component';
+
+// const routes: Routes = [
+//   {
+//     path: '',
+//     component: AuthLayoutComponent,
+//     children: [
+//       { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+//       // Faisal
+//       { path: 'home', component: HomeComponent, title: 'Home' },
+
+//       // Tamer
+//       {
+//         path: 'find-instructor',
+//         component: FindInstructorComponent,
+//         title: 'Find Instructor',
+//       },
+//       { path: 'my-posts', component: MyPostsComponent, title: 'My Posts' },
+//       { path: 'posts', component: PostsComponent, title: 'Posts' },
+//       {
+//         path: 'agreements',
+//         component: AgreementComponent,
+//         title: 'Agreement',
+//       },
+//       {
+//         path: 'create-post',
+//         component: CreatePostComponent,
+//         title: 'Create Post',
+//       },
+//       { path: 'login', component: LoginComponent, title: 'Login' },
+//       { path: 'register', component: RegisterComponent, title: 'Register' },
+//       {
+//         path: 'instructor-bio',
+//         component: InstructorBioComponent,
+//         title: 'Instructor Bio',
+//       },
+//       {
+//         path: 'instructor-profile',
+//         component: InstructorProfile,
+//         title: 'Instructor Profile',
+//       },
+//       {
+//         path: 'learner-profile',
+//         component: LearnerProfile,
+//         title: 'learner profile',
+//       },
+//       { path: 'add-card', component: AddCardComponent, title: 'Add Card' },
+//       {
+//         path: 'session-history',
+//         component: SessionHistory,
+//         title: 'Session History',
+//       },
+
+//       { path: 'payment', component: PaymentComponent, title: 'Payment' },
+//       { path: 'edit-post', component: EditPostComponent, title: 'Edit Post' },
+//       { path: 'report', component: ReportComponent, title: 'Report' },
+//       { path: 'chat', component: ChatComponent, title: 'Chat' },
+//       { path: 'pending-posts', component: PendingPostsComponent, title: 'Pending Posts' },
+//       { path: 'add-rating', component: AddRatingComponent, title: 'add-rating', },
+//       { path: 'pending-reports', component: PendingReportsComponent, title: 'Pending Reports', },
+//       { path: 'view-profile', component: ViewProfileComponent, title: 'View Profile', },
+//       { path: 'cancel-popup', component: CancelPopUpComponent, title: 'cancel-popup', },
+//       { path: 'delete-popup', component: DeletePopUpComponent, title: 'delete-popup', },
+//       { path: 'complete-popup', component: CompletePopUpComponent, title: 'complete-popup', }
+
+
+//     ],
+//   },
+
+//   { path: '**', component: NotFoundComponent, title: 'NotFound' },
+// ];
+
+
+
+
+
+
 
 const routes: Routes = [
+
   {
     path: '',
     component: AuthLayoutComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
-
-      // Faisal
-      { path: 'home', component: HomeComponent, title: 'Home' },
-
-      // Tamer
-      {
-        path: 'find-instructor',
-        component: FindInstructorComponent,
-        title: 'Find Instructor',
-      },
-      { path: 'my-posts', component: MyPostsComponent, title: 'My Posts' },
-      { path: 'posts', component: PostsComponent, title: 'Posts' },
-      {
-        path: 'agreements',
-        component: AgreementComponent,
-        title: 'Agreement',
-      },
-      {
-        path: 'create-post',
-        component: CreatePostComponent,
-        title: 'Create Post',
-      },
-      { path: 'login', component: LoginComponent, title: 'Login' },
-      { path: 'register', component: RegisterComponent, title: 'Register' },
-      {
-        path: 'instructor-bio',
-        component: InstructorBioComponent,
-        title: 'Instructor Bio',
-      },
-      {
-        path: 'instructor-profile',
-        component: InstructorProfile,
-        title: 'Instructor Profile',
-      },
-      {
-        path: 'learner-profile',
-        component: LearnerProfile,
-        title: 'learner profile',
-      },
-      { path: 'add-card', component: AddCardComponent, title: 'Add Card' },
-      {
-        path: 'session-history',
-        component: SessionHistory,
-        title: 'Session History',
-      },
-
-      // Osama
-      { path: 'payment', component: PaymentComponent, title: 'Payment' },
-      { path: 'edit-post', component: EditPostComponent, title: 'Edit Post' },
-      { path: 'report', component: ReportComponent, title: 'Report' },
-      { path: 'chat', component: ChatComponent, title: 'Chat' },
-      { path: 'pending-posts', component: PendingPostsComponent, title: 'Pending Posts' },
-      { path: 'add-rating',component: AddRatingComponent,title: 'add-rating',},
-      { path: 'pending-reports',component: PendingReportsComponent,title: 'Pending Reports',},
-      { path: 'view-profile',component: ViewProfileComponent,title: 'View Profile',},
-      { path: 'cancel-popup',component: CancelPopUpComponent,title: 'cancel-popup',},
-      { path: 'delete-popup',component: DeletePopUpComponent,title: 'delete-popup',},
-      { path: 'complete-popup',component: CompletePopUpComponent,title: 'complete-popup',}
-      
-      
-    ],
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'instructor-bio', component: InstructorBioComponent, title: "Instructor Bio" },
+      { path: 'home', component: HomeComponent, title: "Home" },
+      { path: 'findinstructor', component: FindInstructorComponent, title: "Find Instructor" },
+      { path: 'posts', component: PostsComponent, title: "Posts" },
+    ]
   },
 
-  { path: '**', component: NotFoundComponent, title: 'NotFound' },
+  {
+    path: 'learner', component: BlankLayoutComponent, children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent, title: "Home" },
+      { path: 'findinstructor', component: FindInstructorComponent, title: "Find Instructor" },
+      { path: 'posts', component: PostsComponent, title: "Posts" },
+      { path: 'payment', component: PaymentComponent, title: "Payment" },
+      { path: 'myposts', component: MyPostsComponent, title: "Myposts" },
+      { path: 'createpost', component: CreatePostComponent, title: "CreatePost" },
+    ]
+  },
+  {
+    path: 'instructor', component: InstructorLayoutComponent, children: [
+      { path: 'home', component: HomeComponent, title: "Home" },
+      { path: 'posts', component: PostsComponent, title: "Posts" },
+      { path: 'payment', component: PaymentComponent, title: "Payment" },
+    ]
+  },
+
+  { path: '**', component: NotFoundComponent, title: 'NotFound' }
 ];
+
+
 
 @NgModule({
   imports: [
@@ -108,4 +154,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

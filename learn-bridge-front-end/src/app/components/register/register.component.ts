@@ -159,47 +159,92 @@ export class RegisterComponent implements OnInit {
   // Getter for easy access to form fields
   get sf() { return this.signupForm.controls; }
 
+  // onSignupSubmit() {
+  //   this.signupSubmitted = true;
+
+  //   // Stop here if form is invalid
+  //   if (this.signupForm.invalid) {
+  //     return;
+  //   }
+
+  //   // Set loading state to true
+  //   this.isLoading = true;
+  //   this.errorMessage = ''; // Clear any previous error messages
+
+  //   // Format the data according to your API requirements
+  //   const userData = {
+  //     name: `${this.signupForm.value.firstName} ${this.signupForm.value.lastName}`,
+  //     email: this.signupForm.value.email,
+  //     password: this.signupForm.value.password,
+  //     role: this.signupForm.value.role,
+  //     favoriteCategories: this.signupForm.value.favoriteCategories
+  //   };
+
+  //   this._AuthService.setRegister(userData).subscribe({
+  //     next: (response) => {
+  //       this.isLoading = false;
+
+  //       // If the selected role is "instructor", navigate to instructor-bio page
+  //       if (this.signupForm.value.role === 'instructor') {
+  //         this._Router.navigate(['/instructor-bio']);
+  //       } else {
+  //         // Otherwise navigate to login
+  //         this._Router.navigate(['/login']);
+  //       }
+  //     },
+  //     error: (error: HttpErrorResponse) => {
+  //       // Set error message and reset loading state
+  //       this.errorMessage = error.error.message || 'Registration failed. Please try again.';
+  //       this.isLoading = false;
+  //     }
+  //   });
+  // }
   onSignupSubmit() {
     this.signupSubmitted = true;
-
-    // Stop here if form is invalid
+    
     if (this.signupForm.invalid) {
       return;
     }
-
-    // Set loading state to true
+  
     this.isLoading = true;
-    this.errorMessage = ''; // Clear any previous error messages
-
-    // Format the data according to your API requirements
+    this.errorMessage = '';
+  
     const userData = {
-      name: `${this.signupForm.value.firstName} ${this.signupForm.value.lastName}`,
+      firstName: this.signupForm.value.firstName,
+      lastName: this.signupForm.value.lastName,
       email: this.signupForm.value.email,
       password: this.signupForm.value.password,
       role: this.signupForm.value.role,
-      favoriteCategories: this.signupForm.value.favoriteCategories
+      favouriteCategory: this.signupForm.value.favoriteCategories
     };
-
-    this._AuthService.setRegister(userData).subscribe({
-      next: (response) => {
-        this.isLoading = false;
-
-        // If the selected role is "instructor", navigate to instructor-bio page
-        if (this.signupForm.value.role === 'instructor') {
-          this._Router.navigate(['/instructor-bio']);
-        } else {
-          // Otherwise navigate to login
+    
+    if (userData.role === 'INSTRUCTOR') {
+       localStorage.setItem('pendingInstructor', JSON.stringify(userData));
+  
+       this.isLoading = false;
+       this._Router.navigate(['/instructor-bio']);
+    } else {
+       const formattedUserData = {
+        ...userData,
+        name: `${userData.firstName} ${userData.lastName}`,
+        bio: "",
+        avgPrice: 0,
+        universityInfo: ""
+      };
+  
+      this._AuthService.setRegister(formattedUserData).subscribe({
+        next: (response) => {
+          this.isLoading = false;
           this._Router.navigate(['/login']);
+        },
+        error: (error: HttpErrorResponse) => {
+          this.errorMessage = error.error.message || 'Registration failed. Please try again.';
+          this.isLoading = false;
         }
-      },
-      error: (error: HttpErrorResponse) => {
-        // Set error message and reset loading state
-        this.errorMessage = error.error.message || 'Registration failed. Please try again.';
-        this.isLoading = false;
-      }
-    });
+      });
+    }
   }
-
+  
   // Method to handle Google sign up
   signUpWithGoogle() {
     // Implementation remains unchanged
