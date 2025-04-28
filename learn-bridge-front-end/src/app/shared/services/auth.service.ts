@@ -135,7 +135,7 @@ export class AuthService {
       .set('password', userData.password);
 
     return this._HttpClient.post('http://localhost:8080/api/login', body, {
-      responseType: 'text' // لأن السيرفر بيرجعلك الـ Token مباشرة كنص
+      responseType: 'text' 
     });
   }
 

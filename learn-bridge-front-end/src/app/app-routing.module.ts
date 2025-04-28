@@ -140,6 +140,11 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent, title: "Home" },
       { path: 'posts', component: PostsComponent, title: "Posts" },
       { path: 'payment', component: PaymentComponent, title: "Payment" },
+      {
+        path: 'instructor-bio',
+        component: InstructorBioComponent,
+        title: 'Instructor Bio',
+      },
     ]
   },
 
