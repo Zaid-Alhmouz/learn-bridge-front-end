@@ -13,7 +13,7 @@
             required
           />
           <div *ngIf="isFieldInvalid('firstName')" class="validation-error">
-            {{ getErrorMessage('firstName') }}
+            {{ getErrorMessage("firstName") }}
           </div>
         </div>
         <div class="input-box half">
@@ -25,60 +25,61 @@
             required
           />
           <div *ngIf="isFieldInvalid('lastName')" class="validation-error">
-            {{ getErrorMessage('lastName') }}
+            {{ getErrorMessage("lastName") }}
           </div>
         </div>
       </div>
-      
+
       <!-- Email Field -->
       <div class="input-box">
         <label for="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          formControlName="email"
-          required
-        />
+        <input type="email" id="email" formControlName="email" required />
         <div *ngIf="isFieldInvalid('email')" class="validation-error">
-          {{ getErrorMessage('email') }}
+          {{ getErrorMessage("email") }}
         </div>
       </div>
-      
+
       <!-- Role Selection -->
       <div class="input-box">
         <label for="role">Role</label>
         <select id="role" formControlName="role" required>
           <option value="" disabled selected>Select your role</option>
-          <option value="learner">Learner</option>
-          <option value="instructor">Instructor</option>
+          <option value="LEARNER">LEARNER</option>
+          <option value="INSTRUCTOR">INSTRUCTOR</option>
         </select>
         <div class="dropdown-icon">
           <i class="fas fa-chevron-down"></i>
         </div>
         <div *ngIf="isFieldInvalid('role')" class="validation-error">
-          {{ getErrorMessage('role') }}
+          {{ getErrorMessage("role") }}
         </div>
       </div>
-      
+
       <!-- Categories Selection -->
       <div class="input-box">
         <label for="favoriteCategories">Favorite Categories</label>
-        <select id="favoriteCategories" formControlName="favoriteCategories" required>
+        <select
+          id="favoriteCategories"
+          formControlName="favoriteCategories"
+          required
+        >
           <option value="" disabled selected>Select a category</option>
-          <option value="art">ex.Art</option>
-          <option value="technology">ex.Technology</option>
-          <option value="music">ex.Music</option>
-          <option value="science">ex.Science</option>
-          <option value="languages">ex.Languages</option>
+          <option value="IT">IT</option>
+          <option value="MEDICAL">MEDICAL</option>
+          <option value="SCIENCE">SCIENCE</option>
+          <option value="LANGUAGES">LANGUAGES</option>
         </select>
         <div class="dropdown-icon">
           <i class="fas fa-chevron-down"></i>
         </div>
-        <div *ngIf="isFieldInvalid('favoriteCategories')" class="validation-error">
-          {{ getErrorMessage('favoriteCategories') }}
+        <div
+          *ngIf="isFieldInvalid('favoriteCategories')"
+          class="validation-error"
+        >
+          {{ getErrorMessage("favoriteCategories") }}
         </div>
       </div>
-      
+
       <!-- Password Fields -->
       <div class="input-box">
         <label for="password">Password</label>
@@ -89,10 +90,10 @@
           required
         />
         <div *ngIf="isFieldInvalid('password')" class="validation-error">
-          {{ getErrorMessage('password') }}
+          {{ getErrorMessage("password") }}
         </div>
       </div>
-      
+
       <div class="input-box">
         <label for="confirmPassword">Confirm Password</label>
         <input
@@ -102,38 +103,23 @@
           required
         />
         <div *ngIf="isFieldInvalid('confirmPassword')" class="validation-error">
-          {{ getErrorMessage('confirmPassword') }}
+          {{ getErrorMessage("confirmPassword") }}
         </div>
       </div>
-      
+
       <!-- API Error Alert -->
       <div *ngIf="errorMessage" class="alert alert-danger">
-        {{errorMessage}}
+        {{ errorMessage }}
       </div>
-      
+
       <!-- Submit Button -->
       <div class="button-box">
-        <button 
-          type="submit" 
-          class="signup-btn" 
-          [disabled]="isLoading">
+        <button type="submit" class="signup-btn" [disabled]="isLoading">
           <span *ngIf="!isLoading">Sign up</span>
           <div *ngIf="isLoading" class="spinner"></div>
         </button>
       </div>
-      
-      <div class="divider">
-        <span>or</span>
-      </div>
-      
-      <!-- Google Sign Up -->
-      <div class="google-signup">
-        <button type="button" class="google-btn" (click)="signUpWithGoogle()">
-          <img src="./assets/SVG/google-icon.svg" alt="Google">
-          Sign up with Google
-        </button>
-      </div>
-      
+
       <div class="login-text">
         Already have an account? <a [routerLink]="['/login']">Login</a>
       </div>

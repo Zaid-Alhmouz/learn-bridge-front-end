@@ -3,12 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import axios from 'axios';
 
 @Component({
   selector: 'app-instructor-bio',
   standalone: false,
   templateUrl: './instructor-bio.component.html',
-  styleUrls: ['./instructor-bio.component.scss']
+  styleUrls: ['./instructor-bio.component.scss'],
 })
 export class InstructorBioComponent implements OnInit {
   bioForm: FormGroup;
@@ -25,7 +26,7 @@ export class InstructorBioComponent implements OnInit {
     this.bioForm = this._FormBuilder.group({
       universityInfo: ['', Validators.required],
       bio: ['', Validators.required],
-      avgPrice: ['', [Validators.required, Validators.min(0)]]
+      avgPrice: ['', [Validators.required, Validators.min(0)]],
     });
   }
 
@@ -56,21 +57,23 @@ export class InstructorBioComponent implements OnInit {
       favouriteCategory: pendingData.favouriteCategory,
       bio: this.bioForm.value.bio,
       avgPrice: this.bioForm.value.avgPrice,
-      universityInfo: this.bioForm.value.universityInfo
+      universityInfo: this.bioForm.value.universityInfo,
     };
 
     this.isLoading = true;
 
-    this._AuthService.setRegister(fullUserData).subscribe({
-      next: (response) => {
+    // TODO: fix api call when deploy the project...
+    axios
+      .post('http://localhost:8080/api/register', fullUserData)
+      .then(() => {
         this.isLoading = false;
-        localStorage.removeItem('pendingInstructor'); // Clear temporary data
-        this._Router.navigate(['/login']);
-      },
-      error: (error: HttpErrorResponse) => {
-        this.errorMessage = error.error.message || 'Registration failed. Please try again.';
+        // Faisal: Naviagate here into instructor home page...
+        this._Router.navigate(['/home']);
+      })
+      .catch((error) => {
+        // Faisal: Render this message PLEASE !!!!!!
+        this.errorMessage = `The user with email ${fullUserData.email} exists, please register with a new email...`;
         this.isLoading = false;
-      }
-    });
+      });
   }
 }

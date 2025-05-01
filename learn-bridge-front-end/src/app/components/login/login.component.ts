@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
+import axios from 'axios';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private _FormBuilder: FormBuilder,
     private _AuthService: AuthService,
     private _Router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.loginForm = this._FormBuilder.group({
@@ -37,7 +37,9 @@ export class LoginComponent implements OnInit {
   isFieldInvalid(fieldName: string): boolean {
     const field = this.loginForm.get(fieldName);
     if (field != null)
-      return (field.invalid && (field.dirty || field.touched || this.loginSubmitted));
+      return (
+        field.invalid && (field.dirty || field.touched || this.loginSubmitted)
+      );
     return false;
   }
 
@@ -65,64 +67,55 @@ export class LoginComponent implements OnInit {
     return '';
   }
 
-  // onLoginSubmit() {
-  //   this.loginSubmitted = true;
-
-  //   if (this.loginForm.invalid) {
-  //     return;
-  //   }
-
-  //   this.isLoading = true;
-  //   this.errorMessage = '';
-
-  //   this._AuthService.setLogin(this.loginForm.value).subscribe({
-  //     next: (response) => {
-  //       this.isLoading = false;
-  //       this._Router.navigate(['/blank/home']);
-  //     },
-  //     error: (error: HttpErrorResponse) => {
-  //       this.errorMessage =
-  //         error.error.message || 'Login failed. Please check your credentials.';
-  //       this.isLoading = false;
-  //     },
-  //   });
-  // }
-
-
   onLoginSubmit() {
     this.loginSubmitted = true;
-  
+
     if (this.loginForm.invalid) {
       return;
     }
-  
+
     this.isLoading = true;
     this.errorMessage = '';
-  
-    this._AuthService.setLogin(this.loginForm.value).subscribe({
-      next: (token: any) => {
+
+    const formData = new URLSearchParams();
+    formData.append('username', this.loginForm.value.email);
+    formData.append('password', this.loginForm.value.password);
+
+    axios
+      .post('http://localhost:8080/api/login', formData, {
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        withCredentials: true,
+      })
+      .then((response) => {
         this.isLoading = false;
-        
-        localStorage.setItem('eToken', token);  
-        this._AuthService.decodeUserData();    
-        
-        const userRole = this._AuthService.userData?.role;  
-  
+
+        // TODO: Here we must store the cookie as Token in localStorage...
+        // Backend issue...
+        console.log('Is Zaid Handled this issue ? It must return the cookie');
+        console.log(response.headers['set-cookie']);
+
+        // Here decoding data was deleted "sends an error"...
+        // this._AuthService.decodeUserData();
+
+        const userRole = this._AuthService.userData?.role;
+        console.log(userRole);
+
         if (userRole === 'INSTRUCTOR') {
           this._Router.navigate(['/instructor/home']);
         } else if (userRole === 'LEARNER') {
           this._Router.navigate(['/learner']);
         } else {
-          this._Router.navigate(['/login']); 
+          this._Router.navigate(['/login']);
         }
-      },
-      error: (error: any) => {
-        this.errorMessage = 'Login failed. Please check your credentials.';
+      })
+      .catch((error) => {
+        console.error('Login error:', error);
+        this.errorMessage =
+          error.response?.data?.message ||
+          'Login failed. Please check your credentials.';
         this.isLoading = false;
-      }
-    });
+      });
   }
-  
 
   onForgotPassword() {
     this._Router.navigate(['/forgot-password']);
