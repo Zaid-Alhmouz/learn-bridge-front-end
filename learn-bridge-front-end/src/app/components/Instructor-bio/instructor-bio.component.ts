@@ -4,6 +4,7 @@ import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import axios from 'axios';
+import { first, last } from 'rxjs';
 
 @Component({
   selector: 'app-instructor-bio',
@@ -50,7 +51,8 @@ export class InstructorBioComponent implements OnInit {
     const pendingData = JSON.parse(pendingDataString);
 
     const fullUserData = {
-      name: `${pendingData.firstName} ${pendingData.lastName}`,
+      firstName: pendingData.firstName,
+      lastName: pendingData.lastName,
       email: pendingData.email,
       password: pendingData.password,
       role: pendingData.role,
@@ -67,13 +69,10 @@ export class InstructorBioComponent implements OnInit {
       .post('http://localhost:8080/api/register', fullUserData)
       .then(() => {
         this.isLoading = false;
-        // Faisal: Naviagate here into instructor home page...
-        this._Router.navigate(['/home']);
+        this._Router.navigate(['/instructor/home']);
       })
       .catch((error) => {
-        // Faisal: Render this message PLEASE !!!!!!
-        this.errorMessage = `The user with email ${fullUserData.email} exists, please register with a new email...`;
-        this.isLoading = false;
+        console.log(error);
       });
   }
 }
