@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import axios from 'axios';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-posts',
-  standalone: false,
   templateUrl: './posts.component.html',
-  styleUrls: ['./posts.component.scss'],
+  standalone: false,
+  styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements OnInit {
   posts: any[] = [];
@@ -16,71 +18,94 @@ export class PostsComponent implements OnInit {
   sortOrder: string = 'Ascending';
   currentPage: number = 1;
   pageSize: number = 4;
+  isLoading: boolean = false;
+  errorMessage: string = '';
 
   Math = Math;
 
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
-    this.fetchPosts(); // أول ما الصفحة تفتح بنجيب المنشورات
-  }
-
-  // هاي الدالة بتجيب المنشورات من الـAPI
-  async fetchPosts() {
-    try {
-      const response = await axios.get('http://localhost:8080/api/posts'); // من هون بنبعث طلب للـAPI
-      this.posts = response.data; // بنخزن البيانات اللي جت من الـAPI في المتغير
-      this.applyFilters(); // بعد ما جبنا البيانات، بنطبق الفلاتر
-    } catch (error) {
-      console.error('Error fetching posts:', error); // إذا صار في مشكلة، منعرض الخطأ
+    if (!this.authService.userData) {
+      this.router.navigate(['/login']);
+      return;
     }
+    this.fetchPosts();
   }
 
-  // هاي الدالة بتطبق الفلاتر على المنشورات
-  applyFilters() {
-    let result = [...this.posts]; // بنعمل نسخة من المنشورات عشان نعدل عليها بدون ما نغير الأصل
+  fetchPosts() {
+    this.isLoading = true;
+    this.errorMessage = '';
+    
+    const userRole = this.authService.userData?.role;
+   
 
-    // 1. فلترة حسب نص البحث
+    this.http.get(`http://localhost:8080/api/posts/favourite-category`, {
+      withCredentials: true
+    }).subscribe({
+      next: (response: any) => {
+        this.posts = response;
+        this.applyFilters();
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error fetching posts:', error);
+        this.isLoading = false;
+        this.errorMessage = 'Failed to load posts. ';
+        
+        if (error.status === 401) {
+          this.errorMessage += 'Please login again.';
+          this.router.navigate(['/login']);
+        } else {
+          this.errorMessage += 'Please try again later.';
+        }
+      }
+    });
+  }
+
+  applyFilters() {
+    let result = [...this.posts];
+
     if (this.searchQuery) {
-      result = result.filter((post) =>
-        post.subject.toLowerCase().includes(this.searchQuery.toLowerCase()) // منفلتر المنشورات حسب النص اللي دخلناه
+      result = result.filter(post =>
+        post.subject.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     }
 
-    // 2. فلترة حسب الفئة
     if (this.selectedCategory) {
-      result = result.filter((post) => post.category === this.selectedCategory); // منفلتر حسب الفئة اللي اختارها المستخدم
+      result = result.filter(post => post.category === this.selectedCategory);
     }
 
-    // 3. فلترة حسب السعر
-    result = result.filter((post) => {
+    result = result.filter(post => {
       if (this.selectedPrice === 'Less than 10 JD') return post.price < 10;
       if (this.selectedPrice === '10 JD') return post.price === 10;
       if (this.selectedPrice === 'More than 10 JD') return post.price > 10;
-      return true; // إذا ما كان فيه فلتر سعر محدد، بنعرض كل المنشورات
+      return true;
     });
 
-    // 4. ترتيب حسب السعر
     result.sort((a, b) =>
-      this.sortOrder === 'Ascending' ? a.price - b.price : b.price - a.price // بنرتب المنشورات حسب السعر
+      this.sortOrder === 'Ascending' ? a.price - b.price : b.price - a.price
     );
 
-    this.filteredPosts = result; // بنخزن المنشورات المفلترة في متغير جديد
+    this.filteredPosts = result;
   }
 
-  // هاي الدالة بتتفعّل لما المستخدم يكتب في البحث
   handleSearch(event: Event) {
     const target = event.target as HTMLInputElement;
-    this.searchQuery = target.value; // بنحدث قيمة البحث
-    this.applyFilters(); // وبعدين بنطبق الفلاتر
+    this.searchQuery = target.value;
+    this.applyFilters();
   }
 
-  // هاي الدالة بتغير الصفحة لما المستخدم يضغط على رقم صفحة مختلف
   changePage(page: number) {
-    this.currentPage = page; // بنغير الصفحة الحالية
+    this.currentPage = page;
   }
 
-  // هاي بتعطي المنشورات اللي بدنا نعرضها في الصفحة الحالية
   get paginatedPosts() {
-    const start = (this.currentPage - 1) * this.pageSize; // بنحدد بداية المنشورات في الصفحة
-    return this.filteredPosts.slice(start, start + this.pageSize); // منعرض المنشورات للصفحة الحالية
+    const start = (this.currentPage - 1) * this.pageSize;
+    return this.filteredPosts.slice(start, start + this.pageSize);
   }
 }

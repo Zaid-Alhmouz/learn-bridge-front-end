@@ -115,7 +115,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -134,22 +134,39 @@ export class AuthService {
       .set('username', userData.email)
       .set('password', userData.password);
 
-    return this._HttpClient.post('http://localhost:8080/api/login', body, {
-      responseType: 'text' 
+    return this._HttpClient.post('http://localhost:8080/api/login', body.toString(), {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded'},
+      withCredentials: true
     });
   }
 
-  decodeUserData() {
-    if (localStorage.getItem("eToken") != null) {
-      let encodeToken: any = localStorage.getItem("eToken");
-      let decodeToken = jwtDecode(encodeToken);
-      this.userData = decodeToken;
-    }
+  // decodeUserData() {
+  //   if (localStorage.getItem("eToken") != null) {
+  //     let encodeToken: any = localStorage.getItem("eToken");
+  //     let decodeToken = jwtDecode(encodeToken);
+  //     this.userData = decodeToken;
+  //   }
+  // }
+
+  // Fetch user data after login
+  fetchUserData(): Observable<any> {
+    return this._HttpClient.get('http://localhost:8080/api/user/current', {
+      withCredentials: true
+    }).pipe(
+      tap((user) => {
+        console.log('Raw user data:', user); // Add for debugging
+        this.userData = user;
+      })
+    );
   }
 
+  // Logout: Call backend logout endpoint
   logout() {
-    localStorage.removeItem("eToken");
-    this.userData = null;
-    this._Router.navigate(['/login']);
+    this._HttpClient.post('http://localhost:8080/api/logout', {}, {
+      withCredentials: true
+    }).subscribe(() => {
+      this.userData = null;
+      this._Router.navigate(['/login']);
+    });
   }
 }
