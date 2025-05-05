@@ -5,19 +5,72 @@
       placeholder="Search"
       class="search-bar px-4"
       [(ngModel)]="searchKeyword"
-      (ngModelChange)="fetchInstructors()"
+      (ngModelChange)="filterInstructors()"
     />
+
     <h1 class="fw-bold">Private tutors that fit your schedule</h1>
   </section>
 
+  <section
+    class="filter-bar d-flex align-items-center justify-content-center gap-4 my-4"
+  >
+    <div class="filter-container">
+      <div class="filter-label">
+        <span>Category</span>
+      </div>
+      <select
+        class="form-select rounded-5 px-3 py-2 filter-select"
+        [(ngModel)]="selectedCategory"
+        (change)="onCategoryChange()"
+      >
+        <option value="">All Categories</option>
+        <option>Information Technology</option>
+        <option>Medical</option>
+        <option>Science</option>
+        <option>Languages</option>
+      </select>
+    </div>
+
+    <div class="filter-container">
+      <div class="filter-label">
+        <span>Sort by Sessions</span>
+      </div>
+      <select
+        class="form-select rounded-5 px-3 py-2 filter-select"
+        [(ngModel)]="selectedSortOrder"
+        (change)="filterInstructors()"
+      >
+        <option value="">None</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+    </div>
+    
+
+    <div class="filter-container">
+      <div class="filter-label">
+        <span>Price</span>
+      </div>
+      <select
+        class="form-select rounded-5 px-3 py-2 filter-select"
+        [(ngModel)]="selectedPrice"
+        (change)="filterInstructors()"
+      >
+        <option value="" disabled selected>Price</option>
+        <option>Less than 10 JD</option>
+        <option>10 JD</option>
+        <option>More than 10 JD</option>
+      </select>
+    </div>
+  </section>
 
   <section class="my-5 teachers-result">
-    <div
-      class="d-flex gap-4 my-4"
-      *ngFor="let instructor of instructors"
-    >
+    <div class="d-flex gap-4 my-4" *ngFor="let instructor of instructors">
       <img
-        [src]="instructor.image || 'https://staudt-gmbh.com/wp-content/uploads/2018/07/person-dummy.jpg'"
+        [src]="
+          instructor.image ||
+          'https://staudt-gmbh.com/wp-content/uploads/2018/07/person-dummy.jpg'
+        "
         alt="Instructor Image"
         width="165px"
         height="180px"
