@@ -89,13 +89,10 @@ export class LoginComponent implements OnInit {
       .then((response) => {
         this.isLoading = false;
 
-        // TODO: Here we must store the cookie as Token in localStorage...
-        // Backend issue...
-        console.log('Is Zaid Handled this issue ? It must return the cookie');
-        console.log(response.headers['set-cookie']);
+        console.log(response);
 
-        // Here decoding data was deleted "sends an error"...
-        // this._AuthService.decodeUserData();
+        // Backend has configuration error or sth...
+        this._AuthService.decodeUserData();
 
         const userRole = this._AuthService.userData?.role;
         console.log(userRole);
@@ -103,7 +100,7 @@ export class LoginComponent implements OnInit {
         if (userRole === 'INSTRUCTOR') {
           this._Router.navigate(['/instructor/home']);
         } else if (userRole === 'LEARNER') {
-          this._Router.navigate(['/learner']);
+          this._Router.navigate(['/learner/home']);
         } else {
           this._Router.navigate(['/login']);
         }
