@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -20,13 +19,12 @@ import { AuthLayoutComponent } from './components/auth-layout/auth-layout.compon
 import { BlankLayoutComponent } from './components/blank-layout/blank-layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
-import {HttpClientModule} from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { InstructorBioComponent } from './components/instructor-bio/instructor-bio.component';
 import { InstructorLayoutComponent } from './components/instructor-layout/instructor-layout.component';
 import { NavInstructorComponent } from './components/nav-instructor/nav-instructor.component';
-
+import { InstructorProfile } from './components/Instructor-profile/instructor-profile.component';
 
 @NgModule({
   declarations: [
@@ -47,16 +45,17 @@ import { NavInstructorComponent } from './components/nav-instructor/nav-instruct
     CreatePostComponent,
     InstructorBioComponent,
     InstructorLayoutComponent,
-    NavInstructorComponent,   
+    NavInstructorComponent,
+    InstructorProfile,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

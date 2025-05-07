@@ -161,14 +161,14 @@
   gap: 10px;
   cursor: pointer;
   transition: background-color 0.3s, box-shadow 0.3s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   color: #3c4043;
   font-weight: 500;
 }
 
 .google-btn:hover {
   background-color: #f8f9fa;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .google-btn:active {
@@ -235,8 +235,12 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Modify submit button during loading */
