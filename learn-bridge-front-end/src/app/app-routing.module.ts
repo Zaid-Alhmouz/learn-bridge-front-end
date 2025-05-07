@@ -56,7 +56,7 @@ const routes: Routes = [
       { path: 'myposts', component: MyPostsComponent, title: 'Myposts' },
 
       {
-        path: 'createpost',
+        path: 'create-post',
         component: CreatePostComponent,
         title: 'CreatePost',
       },
