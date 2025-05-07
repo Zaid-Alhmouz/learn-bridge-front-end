@@ -15,6 +15,7 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
 import { InstructorBioComponent } from './components/instructor-bio/instructor-bio.component';
 import { InstructorLayoutComponent } from './components/instructor-layout/instructor-layout.component';
 import { InstructorProfile } from './components/Instructor-profile/instructor-profile.component';
+import { LearnerProfile } from './components/learner-profile/learner-profile.component';
 
 const routes: Routes = [
   {
@@ -53,10 +54,17 @@ const routes: Routes = [
       { path: 'posts', component: PostsComponent, title: 'Posts' },
       { path: 'payment', component: PaymentComponent, title: 'Payment' },
       { path: 'myposts', component: MyPostsComponent, title: 'Myposts' },
+
       {
         path: 'createpost',
         component: CreatePostComponent,
         title: 'CreatePost',
+      },
+
+      {
+        path: 'learner-profile',
+        component: LearnerProfile,
+        title: 'Learner Profile',
       },
     ],
   },

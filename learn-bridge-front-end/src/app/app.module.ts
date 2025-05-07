@@ -25,6 +25,7 @@ import { InstructorBioComponent } from './components/instructor-bio/instructor-b
 import { InstructorLayoutComponent } from './components/instructor-layout/instructor-layout.component';
 import { NavInstructorComponent } from './components/nav-instructor/nav-instructor.component';
 import { InstructorProfile } from './components/Instructor-profile/instructor-profile.component';
+import { LearnerProfile } from './components/learner-profile/learner-profile.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { InstructorProfile } from './components/Instructor-profile/instructor-pr
     InstructorLayoutComponent,
     NavInstructorComponent,
     InstructorProfile,
+    LearnerProfile,
   ],
   imports: [
     BrowserModule,

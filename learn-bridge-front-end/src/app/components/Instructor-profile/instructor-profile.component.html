@@ -184,17 +184,19 @@
             <p
               class="text-danger"
               *ngIf="form.get('avgPrice')?.errors?.['required']"
-              >Average price is required.</p
             >
+              Average price is required.
+            </p>
             <p
               class="text-danger"
               *ngIf="form.get('avgPrice')?.errors?.['min']"
-              >Average price must be greater than 0.</p
             >
+              Average price must be greater than 0.
+            </p>
           </div>
         </div>
 
-        <!-- Save Changes Button (Single Button for All Forms) -->
+        <!-- Save Changes Button -->
         <button
           type="submit"
           class="btn btn-dark w-50 py-2 rounded-pill mt-4 mx-auto d-block"
