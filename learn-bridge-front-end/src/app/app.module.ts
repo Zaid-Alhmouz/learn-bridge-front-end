@@ -19,13 +19,14 @@ import { AuthLayoutComponent } from './components/auth-layout/auth-layout.compon
 import { BlankLayoutComponent } from './components/blank-layout/blank-layout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { HttpClientModule } from '@angular/common/http';
 import { CreatePostComponent } from './components/create-post/create-post.component';
 import { InstructorBioComponent } from './components/instructor-bio/instructor-bio.component';
 import { InstructorLayoutComponent } from './components/instructor-layout/instructor-layout.component';
 import { NavInstructorComponent } from './components/nav-instructor/nav-instructor.component';
 import { InstructorProfile } from './components/Instructor-profile/Instructor-profile.component';
 import { LearnerProfile } from './components/learner-profile/learner-profile.component';
+import { authInterceptor } from './shared/interceptors/auth.interceptor';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,14 @@ import { LearnerProfile } from './components/learner-profile/learner-profile.com
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useValue: authInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+ 

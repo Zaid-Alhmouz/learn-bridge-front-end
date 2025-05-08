@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginSubmitted = false;
   errorMessage: string = '';
   isLoading = false;
-  showDebugLogs = true; // Set to false in production
+  showDebugLogs = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -80,6 +80,7 @@ export class LoginComponent implements OnInit {
     this.authService.setLogin(credentials).subscribe({
       next: (loginResponse) => {
         this.logDebug('Login successful, response:', loginResponse);
+        localStorage.setItem('token', loginResponse.token);
         this.handleSuccessfulLogin();
       },
       error: (loginError: HttpErrorResponse) => {

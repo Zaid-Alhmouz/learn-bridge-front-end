@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import axios from 'axios';
 
 @Component({
   selector: 'app-register',
@@ -23,13 +17,13 @@ export class RegisterComponent implements OnInit {
   signupSubmitted = false;
 
   constructor(
-    private _FormBuilder: FormBuilder,
-    private _AuthService: AuthService,
-    private _Router: Router
-  ) {}
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
-    this.signupForm = this._FormBuilder.group(
+    this.signupForm = this.formBuilder.group(
       {
         firstName: ['', [Validators.required, Validators.minLength(2)]],
         lastName: ['', [Validators.required, Validators.minLength(2)]],
@@ -50,10 +44,6 @@ export class RegisterComponent implements OnInit {
         validators: this.mustMatch('password', 'confirmPassword'),
       }
     );
-
-    this.signupForm.get('role')?.valueChanges.subscribe((role) => {
-      console.log('Selected role:', role);
-    });
   }
 
   // Custom validator to check if password and confirm password match
@@ -77,11 +67,11 @@ export class RegisterComponent implements OnInit {
   // Helper methods to check field validity
   isFieldInvalid(fieldName: string): boolean {
     const field = this.signupForm.get(fieldName);
-    if (field != null)
+    if (field)
       return (
-        field.invalid && (field.dirty || field.touched || this.signupSubmitted)
+        field?.invalid && (field.dirty || field.touched || this.signupSubmitted)
       );
-    return false;
+      return false;
   }
 
   // Helper method to get appropriate error message for each field
@@ -181,9 +171,8 @@ export class RegisterComponent implements OnInit {
 
     if (userData.role === 'INSTRUCTOR') {
       localStorage.setItem('pendingInstructor', JSON.stringify(userData));
-
       this.isLoading = false;
-      this._Router.navigate(['/instructor-bio']);
+      this.router.navigate(['/instructor-bio']);
     } else {
       const formattedUserData = {
         ...userData,
@@ -192,19 +181,17 @@ export class RegisterComponent implements OnInit {
         universityInfo: '',
       };
 
-      // TODO: fix api call when deploy the project...
-      axios
-        .post('http://localhost:8080/api/register', formattedUserData)
-        .then(() => {
+      this.authService.setRegister(formattedUserData).subscribe({
+        next: () => {
           this.isLoading = false;
-          this._Router.navigate(['/login']);
-        })
-        .catch((error) => {
+          this.router.navigate(['/login']);
+        },
+        error: (error: HttpErrorResponse) => {
           this.errorMessage =
-            error.response?.data?.message ||
-            'Registration failed. Please try again.';
+            error.error?.message || 'Registration failed. Please try again.';
           this.isLoading = false;
-        });
+        },
+      });
     }
   }
 }

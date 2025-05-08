@@ -5,6 +5,7 @@
   <form [formGroup]="bioForm" (ngSubmit)="onSubmitBio()" class="background p-5 rounded-5 d-flex flex-column gap-4">
     <h1 class="fs-3 fw-bold text-center">Tell Us About Yourself</h1>
 
+    <!-- Academic Details -->
     <div>
       <label class="form-label">Academic Details</label>
       <input
@@ -12,44 +13,52 @@
         class="form-control"
         formControlName="universityInfo"
         placeholder="University, Major..."
+        required
       />
       <p *ngIf="isFieldInvalid('universityInfo')" class="form-text text-danger">
         University Info is required
       </p>
     </div>
 
+    <!-- Bio Section -->
     <div>
       <label class="form-label">About</label>
       <textarea
-        class="p-2"
+        class="form-control p-2"
         formControlName="bio"
         placeholder="Describe yourself..."
+        rows="4"
+        required
       ></textarea>
       <p *ngIf="isFieldInvalid('bio')" class="form-text text-danger">
         Bio is required
       </p>
     </div>
 
+    <!-- Session Price -->
     <div>
       <label class="form-label">Session Price (In - Average)</label>
       <input
         type="number"
         class="form-control"
         formControlName="avgPrice"
-        placeholder="How much do you usually take per session ?"
+        placeholder="How much do you usually take per session?"
+        required
       />
       <p *ngIf="isFieldInvalid('avgPrice')" class="form-text text-danger">
         Session price is required
       </p>
     </div>
 
+    <!-- Submit Button -->
     <div class="d-flex justify-content-center">
-      <input
+      <button
         type="submit"
-        value="Submit"
         class="btn btn-submit px-5 py-2 rounded-3"
         [disabled]="bioForm.invalid || isLoading"
-      />
+      >
+        {{ isLoading ? 'Submitting...' : 'Submit' }}
+      </button>
     </div>
   </form>
 </div>

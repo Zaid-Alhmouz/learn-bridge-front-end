@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
-import axios from 'axios';
-import { first, last } from 'rxjs';
 
 @Component({
   selector: 'app-instructor-bio',
@@ -18,13 +16,13 @@ export class InstructorBioComponent implements OnInit {
   errorMessage = '';
 
   constructor(
-    private _FormBuilder: FormBuilder,
-    private _AuthService: AuthService,
-    private _Router: Router
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.bioForm = this._FormBuilder.group({
+    this.bioForm = this.fb.group({
       universityInfo: ['', Validators.required],
       bio: ['', Validators.required],
       avgPrice: ['', [Validators.required, Validators.min(0)]],
@@ -37,14 +35,11 @@ export class InstructorBioComponent implements OnInit {
   }
 
   onSubmitBio() {
-    if (this.bioForm.invalid) {
-      return;
-    }
+    if (this.bioForm.invalid) return;
 
     const pendingDataString = localStorage.getItem('pendingInstructor');
-
     if (!pendingDataString) {
-      this.errorMessage = 'Registration data not found. Please register again.';
+      this.errorMessage = 'بيانات التسجيل مش موجودة. ارجع سجّل من جديد.';
       return;
     }
 
@@ -64,15 +59,17 @@ export class InstructorBioComponent implements OnInit {
 
     this.isLoading = true;
 
-    // TODO: fix api call when deploy the project...
-    axios
-      .post('http://localhost:8080/api/register', fullUserData)
-      .then(() => {
+    this.authService.setRegister(fullUserData).subscribe({
+      next: () => {
         this.isLoading = false;
-        this._Router.navigate(['/instructor/home']);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+        localStorage.removeItem('pendingInstructor'); // بنمسح الداتا المؤقتة
+        this.router.navigate(['/instructor/home']);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.isLoading = false;
+        this.errorMessage =
+          error.error?.message || 'صار في مشكلة أثناء التسجيل، جرب مرة ثانية.';
+      },
+    });
   }
 }
