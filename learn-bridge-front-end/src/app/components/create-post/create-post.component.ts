@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { PostService } from '../../shared/services/post.service';
 
 @Component({
-  standalone: false,
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss'],
 })
 export class CreatePostComponent {
-  constructor(private http: HttpClient) {}
-
   categories: string[] = ['IT', 'SCIENCE', 'LANGUAGES', 'MEDICAL'];
 
   formData = {
@@ -20,6 +17,8 @@ export class CreatePostComponent {
   };
 
   showError = false;
+
+  constructor(private postService: PostService) {}
 
   onSubmit() {
     if (
@@ -35,18 +34,12 @@ export class CreatePostComponent {
 
     this.showError = false;
 
-    this.http
-      .post(
-        'http://localhost:8080/api/posts/create-post',
-        { ...this.formData },
-        {
-          headers: { 'Content-Type': 'application/json' },
-          withCredentials: true,
-        }
-      )
-      .subscribe({
-        next: () => alert('Post created successfully!'),
-        error: (err) => console.error('Error creating post', err),
-      });
+    this.postService.createPost(this.formData).subscribe({
+      next: () => {
+        alert('Post created successfully!');
+        this.postService.fetchPosts();  // تحديث البوستات بعد النشر
+      },
+      error: (err) => console.error('Error creating post', err),
+    });
   }
 }

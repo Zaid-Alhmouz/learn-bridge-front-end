@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
+import { PostService } from '../../shared/services/post.service';
 
 @Component({
   selector: 'app-posts',
@@ -24,7 +24,7 @@ export class PostsComponent implements OnInit {
   Math = Math;
 
   constructor(
-    private http: HttpClient,
+    private postService: PostService,  // استخدام الخدمة بدلاً من HttpClient
     private authService: AuthService,
     private router: Router
   ) {}
@@ -41,12 +41,11 @@ export class PostsComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = '';
     
-    const userRole = this.authService.userData?.role;
-   
+    // استخدم الخدمة بدلاً من HttpClient لجلب البيانات
+    this.postService.fetchPosts();  // سيتم تحديث قائمة البوستات بعد تحميلها
 
-    this.http.get(`http://localhost:8080/api/posts/favourite-category`, {
-      withCredentials: true
-    }).subscribe({
+    // الاشتراك في البوستات المحملة من الخدمة
+    this.postService.posts$.subscribe({
       next: (response: any) => {
         this.posts = response;
         this.applyFilters();
